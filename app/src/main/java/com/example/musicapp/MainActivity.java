@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    //linchen da sb
+    //lc lc lc yyds
     private Button bnt11;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
