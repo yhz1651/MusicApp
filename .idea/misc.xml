@@ -8,6 +8,9 @@
         <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_main.xml" value="0.32760416666666664" />
         <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_play_music.xml" value="0.32760416666666664" />
         <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_register.xml" value="0.32760416666666664" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/music_fragment.xml" value="0.5494791666666666" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/user_fragment.xml" value="0.5494791666666666" />
+        <entry key="..\:/android_musicapp/app/src/main/res/menu/menu.xml" value="0.4861111111111111" />
       </map>
     </option>
   </component>
