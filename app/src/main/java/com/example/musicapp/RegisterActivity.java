@@ -1,12 +1,5 @@
 package com.example.musicapp;
 
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-
-//注册界面，注册成功返回登录界面
-//import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,14 +9,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.example.musicapp.service.UserService;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-
-
+//注册界面，注册成功返回登录界面
 public class RegisterActivity extends AppCompatActivity {
 
     EditText username;
@@ -103,8 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name=username.getText().toString().trim();
                 String pass=password.getText().toString().trim();
-//                xingquButton.getText().toString().trim();
-                String xingqustr=txt;
+                String xingqustr=txt.trim();
+                EditText et = (EditText)findViewById(R.id.xingquRegister);//获取edittext组件
+                et.setText(xingqustr);
                 String sexstr=((RadioButton)RegisterActivity.this.findViewById(sex.getCheckedRadioButtonId())).getText().toString();
                 Log.i("TAG",name+"_"+pass+"_"+xingqustr+"_"+sexstr);
                 UserService uService=new UserService(RegisterActivity.this);
