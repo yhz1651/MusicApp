@@ -64,7 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                             txt += (strList[index]+" ");
                         }
                     }
-
+                    EditText et = (EditText)findViewById(R.id.xingquRegister);//获取edittext组件
+                    et.setText(txt);
                     // 打印
                     Toast.makeText(RegisterActivity.this, txt, Toast.LENGTH_SHORT).show();
 
@@ -96,8 +97,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String name=username.getText().toString().trim();
                 String pass=password.getText().toString().trim();
                 String xingqustr=txt.trim();
-                EditText et = (EditText)findViewById(R.id.xingquRegister);//获取edittext组件
-                et.setText(xingqustr);
+//                EditText et = (EditText)findViewById(R.id.xingquRegister);//获取edittext组件
+//                et.setText(xingqustr);
                 String sexstr=((RadioButton)RegisterActivity.this.findViewById(sex.getCheckedRadioButtonId())).getText().toString();
                 Log.i("TAG",name+"_"+pass+"_"+xingqustr+"_"+sexstr);
                 UserService uService=new UserService(RegisterActivity.this);

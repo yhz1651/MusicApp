@@ -5,7 +5,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -22,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //
 //        Intent intent = new Intent(this, PlayMusicActivity.class);
 //        startActivity(intent);
-
         // 步骤1：获取FragmentManager
         FragmentManager fragmentManager = getFragmentManager();
         // 步骤2：获取FragmentTransaction
