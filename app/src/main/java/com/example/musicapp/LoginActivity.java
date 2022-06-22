@@ -1,14 +1,8 @@
 package com.example.musicapp;
 
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-
 //登录界面，登录成功进入主界面
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

@@ -122,7 +122,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void findViews() {
         username=(EditText) findViewById(R.id.usernameRegister);
         password=(EditText) findViewById(R.id.passwordRegister);
-//        age= (Button) findViewById(R.id.xingquButton);
         xingquregister= (EditText) findViewById(R.id.xingquRegister);
         sex=(RadioGroup) findViewById(R.id.sexRegister);
         register=(Button) findViewById(R.id.Register);
