@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//即activity_login.xml
+        setContentView(R.layout.activity_login);
         findViews();
     }
     private EditText username;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(flag){
                     Log.i("TAG","登录成功");
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }else{
                     Log.i("TAG","登录失败");
