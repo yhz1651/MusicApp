@@ -1,12 +1,5 @@
 package com.example.musicapp;
 
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-
-//注册界面，注册成功返回登录界面
-//import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,21 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.musicapp.service.UserService;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-
-
+//注册界面，注册成功返回登录界面
 public class RegisterActivity extends AppCompatActivity {
 
     EditText username;
     EditText password;
     EditText xingquregister;
-    Button xingquButton;
     RadioGroup sex;
     Button register;
     //
@@ -104,7 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String name=username.getText().toString().trim();
                 String pass=password.getText().toString().trim();
 //                xingquButton.getText().toString().trim();
-                String xingqustr=txt;
+                String xingqustr=txt.trim();
+//                TextView tv = (TextView) findViewById(R.id.xingqutext);//获取textview组件
+//                tv.setText(xingqustr);//在textview中显示
+                EditText tv = (EditText) findViewById(R.id.xingquRegister);//获取EditText组件
+                tv.setText(xingqustr);//在textview中显示
                 String sexstr=((RadioButton)RegisterActivity.this.findViewById(sex.getCheckedRadioButtonId())).getText().toString();
                 Log.i("TAG",name+"_"+pass+"_"+xingqustr+"_"+sexstr);
                 UserService uService=new UserService(RegisterActivity.this);
@@ -122,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void findViews() {
         username=(EditText) findViewById(R.id.usernameRegister);
         password=(EditText) findViewById(R.id.passwordRegister);
-        xingquregister= (EditText) findViewById(R.id.xingquRegister);
+//        xingquregister= (EditText) findViewById(R.id.xingquRegister);
         sex=(RadioGroup) findViewById(R.id.sexRegister);
         register=(Button) findViewById(R.id.Register);
     }

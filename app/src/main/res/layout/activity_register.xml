@@ -54,7 +54,6 @@
             </TableRow>
 
             <TableRow >
-
 <!--                <TextView-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
@@ -67,6 +66,7 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:hint="请输入年龄！！！" />-->
                 <TextView
+                    android:id="@+id/xingqutext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
