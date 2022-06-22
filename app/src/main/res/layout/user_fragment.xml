@@ -8,6 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="user_fragment" />
+        android:text="用户信息界面、管理员界面"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
 </FrameLayout>
