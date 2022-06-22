@@ -8,6 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="play_fragment" />
+        android:text="音乐播放界面"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
 </FrameLayout>
