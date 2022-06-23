@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 设置填充颜色 前两位为透明度 十六进制 -->
+    <solid android:color="#F2ffffff" />
+    <!-- 设置几何图形四个角的弧度 -->
+    <corners android:radius="25dp"/>
+    <!-- 如果需要使用边框 -->
+    <stroke android:color="#2D000000"
+        android:width="2dp"/>
+
+</shape>
