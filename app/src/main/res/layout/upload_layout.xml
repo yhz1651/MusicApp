@@ -23,7 +23,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:textColor="#4684ff"
-            android:text="欢迎注册爱音乐!"
+            android:text="上传音乐"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -38,12 +38,12 @@
             <TableRow>
 
                 <EditText
-                    android:id="@+id/usernameRegister"
+                    android:id="@+id/song_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_span="3"
                     android:background="@drawable/login_radius"
-                    android:hint="请输入用户名"
+                    android:hint="请输入歌曲名"
                     android:paddingStart="15dp"
                     android:textSize="15sp" />
             </TableRow>
@@ -51,86 +51,65 @@
             <TableRow android:layout_marginTop="15dp">
 
                 <EditText
-                    android:id="@+id/passwordRegister"
+                    android:id="@+id/singername"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_span="3"
                     android:background="@drawable/login_radius"
-                    android:hint="请输入密码"
+                    android:hint="请输入歌手名"
                     android:paddingStart="15dp"
                     android:textSize="15sp" />
-            </TableRow>
-            //
 
-            <TableRow android:layout_marginTop="0dp">
-
-                <RadioGroup
-                    android:id="@+id/sexRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_span="3"
-                    android:checkedButton="@+id/nan"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/nan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="男" />
-
-                    <RadioButton
-                        android:id="@+id/woman"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="女" />
-                </RadioGroup>
-            </TableRow>
-            //
-
-            <TableRow android:layout_marginTop="0dp">
-
-                <EditText
-                    android:id="@+id/ageRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_span="3"
-                    android:background="@drawable/login_radius"
-                    android:hint="请输入年龄"
-                    android:paddingStart="15dp"
-                    android:textSize="15sp" />
             </TableRow>
 
-            <TableRow android:layout_marginTop="15dp">
 
-                <EditText
-                    android:id="@+id/phoneRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_span="3"
-                    android:background="@drawable/login_radius"
-                    android:hint="请输入手机号"
-                    android:paddingStart="15dp"
-                    android:textSize="15sp" />
-            </TableRow>
-            //
+
+
+
 
             <TableRow android:layout_marginTop="25dp" >
 
 
                 <EditText
-                    android:id="@+id/xingquRegister"
+                    android:id="@+id/url"
                     android:layout_width="fill_parent"
+                    android:layout_height="55dp"
+                    android:editable="false"
                     android:layout_span="2"
                     android:background="@drawable/login_radius"
-                    android:hint="请选择歌曲兴趣"
+                    android:hint="请选择歌曲文件"
                     android:paddingStart="15dp"
-                    android:textSize="15sp"
-                    android:layout_height="55dp"
-                    />
+                    android:textSize="15sp" />
+
                 <Button
-                    android:id="@+id/xingquButton"
+                    android:id="@+id/search_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/login_button"
+                    android:onClick="on2click"
+                    android:text="选择文件"
+                    tools:ignore="OnClick"
+
+                    />
+
+            </TableRow>
+
+            <TableRow android:layout_marginTop="25dp" >
+
+
+                <EditText
+                    android:id="@+id/songKind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="55dp"
+                    android:editable="false"
+                    android:layout_span="2"
+                    android:background="@drawable/login_radius"
+                    android:hint="请选择歌曲类别"
+                    android:paddingStart="15dp"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/select_kind"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/login_button"
@@ -146,32 +125,16 @@
             <TableRow android:layout_marginTop="20dp">
 
                 <Button
-                    android:id="@+id/Register"
+                    android:id="@+id/Submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:background="@drawable/login_button"
-                    android:text="注册" />
+                    android:text="提交" />
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp">
 
-                <TextView
-                    android:id="@+id/BackToLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="返回登录界面"
-                    android:textColor="#4684ff"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-            </TableRow>
         </TableLayout>
 
     </LinearLayout>

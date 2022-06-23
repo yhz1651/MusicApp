@@ -4,13 +4,16 @@ package com.example.musicapp;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.musicapp.service.DatabaseHelper;
 import com.example.musicapp.service.UserService;
+import com.example.musicapp.tool.Sqltool;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,7 +22,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         findViews();
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
+
     private EditText username;
     private EditText password;
     private Button login;

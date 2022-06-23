@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.musicapp.service.UserService;
 import android.app.AlertDialog;
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText phone;
     EditText xingquregister;
     Button register;
+    TextView back;
     //
     String txt = "";
     //
@@ -116,6 +118,12 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+       back.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+               Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+               startActivity(intent);
+           }
+       });
     }
     //
     private void findViews() {
@@ -126,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         phone=(EditText) findViewById(R.id.phoneRegister);
         xingquregister= (EditText) findViewById(R.id.xingquRegister);
         register=(Button) findViewById(R.id.Register);
+        back=(TextView) findViewById(R.id.BackToLogin);
     }
 
 }
