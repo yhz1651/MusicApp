@@ -2,7 +2,10 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,9 +18,17 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.example.musicapp.service.DatabaseHelper;
+import com.example.musicapp.service.UserService;
+
 //注册界面，注册成功返回登录界面
 public class UploadActivity extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
+    public UploadActivity(Context context){
+        dbHelper=new DatabaseHelper(context);
+    }
     int index;
+    int s_id;
     EditText songname;
     EditText singername;
     EditText songkind;
@@ -95,14 +106,28 @@ public class UploadActivity extends AppCompatActivity {
                 String song_n= songname.getText().toString().trim();
                 String singer_n= singername.getText().toString().trim();
                 String url = url_text.getText().toString().trim();
-                db.search("SELECT * FROM Singer WHERE s_name='"+singer_n+"'");//搜索歌手id
-                Song  s = new Song(song_n,singer_id,url,user_id);
-                Toast.makeText(UploadActivity.this, "注册成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(UploadActivity.this,LoginActivity.class);
+                dbHelper= UserService.getDbHelper();
+                SQLiteDatabase sdb=dbHelper.getReadableDatabase();
+                String sql="SELECT s_id FROM Singer WHERE s_name=?";
+                Cursor cursor=sdb.rawQuery(sql, new String[]{singer_n});
+                UserApplication application1 = (UserApplication) UploadActivity.this.getApplication();
+                int id = application1.getValue();;
+                if(cursor.moveToFirst()){
+                    s_id = cursor.getInt(0);
+                    Toast.makeText(LoginActivity.getInstance(),cursor.getString(0), Toast.LENGTH_LONG).show();
+                    cursor.close();
+                }else{
+                    s_id = 1;
+                }
+                Song  s = new Song(song_n,s_id,url,id);//存入歌曲对象中
+                sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
+                Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
+                sdb.execSQL(sql, obj);
+                Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(UploadActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

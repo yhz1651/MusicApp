@@ -8,26 +8,26 @@ public class Song implements Serializable {
     private int singer;
     private String kind;
     private String url;
+    private int user;
     public Song() {
         super();
         //TODO Auto-generated constructor stub
     }
-    public Song(String name, int singer,  String url, String user) {
+    public Song(String name, int singer,  String url, int user) {
         this.name = name;
         this.singer = singer;
         this.url = url;
         this.user = user;
     }
 
-    public String getUser() {
+    public int getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
-    private String user;
     public String getId() {
         return id;
     }

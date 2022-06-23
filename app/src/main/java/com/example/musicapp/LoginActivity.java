@@ -16,13 +16,18 @@ import com.example.musicapp.service.UserService;
 import com.example.musicapp.tool.Sqltool;
 
 public class LoginActivity extends AppCompatActivity {
+    private static LoginActivity instance;
+
+    public static LoginActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         findViews();
-
+        instance = this;
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
