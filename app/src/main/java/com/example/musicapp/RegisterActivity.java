@@ -20,9 +20,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText username;
     EditText password;
-    EditText xingquregister;
-    Button xingquButton;
     RadioGroup sex;
+    EditText age;
+    EditText phone;
+    EditText xingquregister;
     Button register;
     //
     String txt = "";
@@ -96,17 +97,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name=username.getText().toString().trim();
                 String pass=password.getText().toString().trim();
-                String xingqustr=txt.trim();
-//                EditText et = (EditText)findViewById(R.id.xingquRegister);//获取edittext组件
-//                et.setText(xingqustr);
                 String sexstr=((RadioButton)RegisterActivity.this.findViewById(sex.getCheckedRadioButtonId())).getText().toString();
+                int ag= Integer.parseInt(age.getText().toString().trim());
+                String ph=phone.getText().toString().trim();
+                String xingqustr=txt.trim();
                 Log.i("TAG",name+"_"+pass+"_"+xingqustr+"_"+sexstr);
                 UserService uService=new UserService(RegisterActivity.this);
                 User user=new User();
                 user.setUsername(name);
                 user.setPassword(pass);
-                user.setXingqu(xingqustr);
                 user.setSex(sexstr);
+                user.setAge(ag);
+                user.setPhone(ph);
+                user.setXingqu(xingqustr);
                 uService.register(user);
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
@@ -118,8 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
     private void findViews() {
         username=(EditText) findViewById(R.id.usernameRegister);
         password=(EditText) findViewById(R.id.passwordRegister);
-        xingquregister= (EditText) findViewById(R.id.xingquRegister);
         sex=(RadioGroup) findViewById(R.id.sexRegister);
+        age=(EditText) findViewById(R.id.ageRegister);
+        phone=(EditText) findViewById(R.id.phoneRegister);
+        xingquregister= (EditText) findViewById(R.id.xingquRegister);
         register=(Button) findViewById(R.id.Register);
     }
 

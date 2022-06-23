@@ -34,23 +34,18 @@
             android:layout_marginLeft="15dp"
             android:stretchColumns="1" >
             <TableRow >
-
-
                 <EditText
                     android:id="@+id/usernameRegister"
                     android:layout_width="match_parent"
                     android:layout_span="3"
                     android:textSize="15sp"
                     android:paddingStart="15dp"
-                    android:layout_height="55dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/login_radius"
                     android:hint="请输入用户名" />
             </TableRow>
 
-            <TableRow android:layout_marginTop="25dp">
-
-
-
+            <TableRow android:layout_marginTop="15dp">
                 <EditText
                     android:id="@+id/passwordRegister"
                     android:layout_width="match_parent"
@@ -58,13 +53,57 @@
                     android:layout_span="3"
                     android:paddingStart="15dp"
                     android:textSize="15sp"
-                    android:layout_height="55dp"
+                    android:layout_height="40dp"
                     android:hint="请输入密码" />
             </TableRow>
-
-            <TableRow android:layout_marginTop="25dp" >
-
-
+            //
+            <TableRow android:layout_marginTop="0dp">
+                <RadioGroup
+                    android:id="@+id/sexRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@+id/nan"
+                    android:layout_span="3"
+                    android:orientation="horizontal" >
+                    <RadioButton
+                        android:id="@+id/nan"
+                        android:text="男"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/woman"
+                        android:text="女"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+                </RadioGroup>
+            </TableRow>
+            //
+            <TableRow android:layout_marginTop="0dp">
+                <EditText
+                    android:id="@+id/ageRegister"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/login_radius"
+                    android:layout_span="3"
+                    android:paddingStart="15dp"
+                    android:textSize="15sp"
+                    android:layout_height="40dp"
+                    android:hint="请输入年龄" />
+            </TableRow>
+            <TableRow android:layout_marginTop="15dp">
+            <EditText
+                android:id="@+id/phoneRegister"
+                android:layout_width="match_parent"
+                android:background="@drawable/login_radius"
+                android:layout_span="3"
+                android:paddingStart="15dp"
+                android:textSize="15sp"
+                android:layout_height="40dp"
+                android:hint="请输入手机号" />
+            </TableRow>
+            //
+            <TableRow android:layout_marginTop="15dp" >
                 <EditText
                     android:id="@+id/xingquRegister"
                     android:layout_width="fill_parent"
@@ -73,7 +112,7 @@
                     android:hint="请选择歌曲兴趣"
                     android:paddingStart="15dp"
                     android:textSize="15sp"
-                    android:layout_height="55dp"
+                    android:layout_height="40dp"
                     />
                     <Button
                         android:id="@+id/xingquButton"
@@ -83,41 +122,9 @@
                         android:onClick="on2click"
                         android:text="选择"
                         tools:ignore="OnClick"
-
                         />
-
             </TableRow>
-
-            <TableRow android:layout_marginTop="25dp">
-
-
-
-                <RadioGroup
-                    android:id="@+id/sexRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checkedButton="@+id/nan"
-                    android:layout_span="3"
-                    android:orientation="horizontal" >
-
-                    <RadioButton
-                        android:id="@+id/nan"
-                        android:text="男"
-                        android:layout_weight="0.5"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-
-                    <RadioButton
-                        android:id="@+id/woman"
-                        android:text="女"
-                        android:layout_weight="0.5"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
-                </RadioGroup>
-            </TableRow>
-
-            <TableRow android:layout_marginTop="20dp">
-
+            <TableRow android:layout_marginTop="15dp">
                     <Button
                         android:id="@+id/Register"
                         android:layout_width="150dp"
@@ -127,7 +134,7 @@
                         android:text="注册" />
 
             </TableRow>
-            <TableRow android:layout_marginTop="20dp">
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/BackToLogin"
@@ -136,8 +143,8 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#4684ff"
-                    android:layout_marginTop="5dp"
-                    android:text="回到登录界面"
+                    android:layout_marginTop="0dp"
+                    android:text="返回登录界面"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>

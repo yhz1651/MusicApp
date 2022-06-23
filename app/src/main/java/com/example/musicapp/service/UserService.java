@@ -25,8 +25,8 @@ public class UserService {
     }
     public boolean register(User user){
         SQLiteDatabase sdb=dbHelper.getReadableDatabase();
-        String sql="insert into user(username,password,age,sex) values(?,?,?,?)";
-        Object obj[]={user.getUsername(),user.getPassword(),user.getXingqu(),user.getSex()};
+        String sql="insert into user(username,password,sex,age,phone,xingqu) values(?,?,?,?,?,?)";
+        Object obj[]={user.getUsername(),user.getPassword(),user.getSex(),user.getAge(),user.getPhone(),user.getXingqu()};
         sdb.execSQL(sql, obj);
         return true;
     }
