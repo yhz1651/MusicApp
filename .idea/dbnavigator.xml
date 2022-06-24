@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -40,7 +40,16 @@ From user]]></console>
     <connection id="47de4202-70af-460f-aa26-16e52ef40721" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="47de4202-70af-460f-aa26-16e52ef40721" dataset="main.User" active-filter-id="" />
+    <filter-actions connection-id="47de4202-70af-460f-aa26-16e52ef40721" dataset="main.User" active-filter-id="9ecb32c3-0c12-46f7-aef2-988699307664">
+      <filter id="9ecb32c3-0c12-46f7-aef2-988699307664" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="u_id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="47de4202-70af-460f-aa26-16e52ef40721" dataset="main.Music" active-filter-id="bff0ccb5-bcd1-4ff4-9d75-c98eff98ae12">
+      <filter id="bff0ccb5-bcd1-4ff4-9d75-c98eff98ae12" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="m_id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

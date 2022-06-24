@@ -23,7 +23,6 @@ public class UserService {
 
     public boolean login(String username,String password){
         SQLiteDatabase sdb=dbHelper.getReadableDatabase();
-
         String sql="select u_id from user where u_username=? and u_password=?";
         Cursor cursor=sdb.rawQuery(sql, new String[]{username,password});
         if(cursor.moveToFirst()){

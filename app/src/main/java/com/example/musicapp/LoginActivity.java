@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.musicapp.service.DatabaseHelper;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(flag){
                     Log.i("TAG","登录成功");
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,SearchMusic.class);
                     startActivity(intent);
                 }else{
                     Log.i("TAG","登录失败");
@@ -71,6 +72,13 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageView btn1 = (ImageView)findViewById(R.id.LogoImage);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,UploadActivity.class);
                 startActivity(intent);
             }
         });

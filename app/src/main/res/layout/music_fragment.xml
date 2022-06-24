@@ -1,15 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".musicFragment">
-
-    <TextView
+    android:background="#f6f7fb"
+    tools:context=".SearchMusic">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="歌单界面、搜索功能"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="歌曲"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/s_key"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_radius"
+            android:hint="输入搜索信息"
+            android:paddingStart="15dp"
+            android:textSize="15sp" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/search"
+            android:background="@drawable/search"
+            android:layout_marginLeft="10dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/upload"
+            android:background="@drawable/upload"
+            android:layout_marginLeft="15dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/userpage"
+            android:background="@drawable/userpage"
+            android:layout_marginLeft="15dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/song"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/singer"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/frame_radius">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerView"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

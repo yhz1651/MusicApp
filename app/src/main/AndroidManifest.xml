@@ -14,8 +14,18 @@
         android:supportsRtl="true"
         android:name=".UserApplication"
         android:theme="@style/Theme.MusicApp">
-
-
+        <activity
+            android:name=".change_music"
+            android:exported="true"/>
+        <activity
+            android:name=".user_activity"
+            android:exported="true"/>
+        <activity
+            android:name=".UploadActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".SearchMusic"
+            android:exported="true"/>
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />

@@ -1,15 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f6f7fb"
     tools:context=".userFragment">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="用户信息界面、管理员界面"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="用户"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/s_key"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_radius"
+            android:hint="输入搜索信息"
+            android:paddingStart="15dp"
+            android:textSize="15sp" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/search"
+            android:background="@drawable/search"
+            android:layout_marginLeft="10dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/upload"
+            android:background="@drawable/upload"
+            android:layout_marginLeft="15dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/userpage"
+            android:background="@drawable/userpage"
+            android:layout_marginLeft="15dp"
+            android:maxHeight="10dp"
+            android:layout_height="match_parent">
+        </ImageButton>
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/song"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_no_line" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:text="欢迎"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:text="18767786828"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+            <ImageButton
+                android:layout_gravity="center"
+                android:id="@+id/change_user"
+                android:background="@drawable/changeuser"
+                android:layout_marginLeft="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+            </ImageButton>
+
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_no_line" >
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/frame_no_line" >
+                <ImageView
+                    android:background="@drawable/listen"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_gravity="center"
+                    android:layout_width="70dp"
+                    android:layout_weight="1"
+                    android:layout_height="90dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/listen_number"
+                    android:gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="#000000"
+                    android:text="已听歌曲233首"
+                    android:layout_weight="3"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/frame_no_line" >
+                <ImageView
+                    android:background="@drawable/store"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_gravity="center"
+                    android:layout_width="70dp"
+                    android:layout_weight="1"
+                    android:layout_height="90dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="#000000"
+                    android:id="@+id/store_number"
+                    android:text="已收藏21首"
+                    android:layout_weight="3"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/frame_no_line" >
+                <ImageView
+                    android:background="@drawable/comment"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_gravity="center"
+                    android:layout_width="70dp"
+                    android:layout_weight="1"
+                    android:layout_height="90dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/comment_number"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="#000000"
+                    android:text="评论15条"
+                    android:layout_weight="3"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/frame_no_line">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#000000"
+                android:text="我上传的歌曲"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:id="@+id/recyclerView"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>

@@ -38,41 +38,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " m_id INTEGER PRIMARY KEY  autoincrement," +
                 " m_name varchar(30)," +
                 " m_url varchar(50)," +
-                " m_singer INTEGER," +
+                " m_singer varchar(30)," +
                 " m_type INTEGER CHECK(m_type=1 OR m_type=0)," +
-                " m_userid INTEGER," +
-                " FOREIGN KEY(m_userid) REFERENCES [User](u_id)," +
-                " FOREIGN KEY(m_singer) REFERENCES Singer(s_id)" +
+                " m_userid INTEGER" +
                 ");";
         String sql3 = "CREATE TABLE Musiclist" +
                 "(" +
                 " ml_id INTEGER  PRIMARY KEY autoincrement," +
                 " ml_name varchar(20)," +
-                " ml_userid INTEGER," +
-                " FOREIGN KEY(ml_userid) REFERENCES [User](u_id)" +
+                " ml_userid INTEGER" +
                 ");";
         String sql4 ="CREATE TABLE Music_musiclist" +
                 "(" +
                 " mml_musicid INTEGER ," +
                 " mml_listid INTEGER ," +
-                " primary key(mml_musicid,mml_listid)," +
-                " FOREIGN KEY(mml_musicid) REFERENCES Music(m_id)," +
-                " FOREIGN KEY(mml_listid) REFERENCES Musiclist(ml_id)" +
+                " primary key(mml_musicid,mml_listid)" +
                 ");";
         String sql5 ="CREATE TABLE Comment" +
                 "(" +
                 " c_id INTEGER  PRIMARY KEY autoincrement," +
                 " c_content varchar(200)," +
-                " c_userid INTEGER ," +
-                " FOREIGN KEY(c_userid) REFERENCES [User](u_id)" +
+                " c_userid INTEGER " +
                 ");";
         String sql6 = "CREATE TABLE Music_commment" +
                 "(" +
                 " mc_musicid INTEGER," +
                 " mc_commentid INTEGER," +
-                " primary key(mc_musicid,mc_commentid)," +
-                " FOREIGN KEY(mc_musicid) REFERENCES Music(m_id)," +
-                " FOREIGN KEY(mc_commentid) REFERENCES Comment(c_id)" +
+                " primary key(mc_musicid,mc_commentid)" +
                 ");";
         db.execSQL(sql1);
         db.execSQL(sql2);

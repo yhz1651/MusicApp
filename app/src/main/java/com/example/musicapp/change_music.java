@@ -1,28 +1,26 @@
 package com.example.musicapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.musicapp.service.DatabaseHelper;
 import com.example.musicapp.service.UserService;
 
-//注册界面，注册成功返回登录界面
-public class UploadActivity extends AppCompatActivity {
+public class change_music extends AppCompatActivity {
     int index;
     int s_id;
     EditText songname;
@@ -37,50 +35,6 @@ public class UploadActivity extends AppCompatActivity {
     private void cancelBool(){
     }
 
-    public void on2click(View view) {
-        Button button = findViewById(R.id.select_kind);
-        if(button != null){
-            AlertDialog.Builder aBuilder = new AlertDialog.Builder(UploadActivity.this);
-            aBuilder.setTitle("歌曲类别");
-
-            // 创建对话框的内容
-            aBuilder .setSingleChoiceItems(kind_list,1,new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    index = i;
-                }
-            });
-
-            // 加入多选对话框下面的确认按钮,打印勾选的项名称
-            aBuilder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // 获取勾选到的文本并打印
-//                    String txt = "";
-                    txt= kind_list[index];
-                    songkind.setText(txt);
-                    // 打印
-                    Toast.makeText(UploadActivity.this, txt, Toast.LENGTH_SHORT).show();
-
-                    // 取消内部已勾选
-                    cancelBool();
-                }
-            });
-
-            // 点击对话框外,进行取消对话框事件
-            aBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialogInterface) {
-                    // 取消内部已勾选
-                    cancelBool();
-                }
-            });
-
-            // 显示对话框
-            aBuilder.show();
-        }
-    }
-    //
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_layout);
@@ -146,4 +100,4 @@ public class UploadActivity extends AppCompatActivity {
         Submit = (Button) findViewById(R.id.Submit);
     }
 
-}
+}}

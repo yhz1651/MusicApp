@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Song implements Serializable {
     private String id;
     private String name;
-    private int singer;
+    private String singer;
     private String kind;
     private String url;
     private int user;
@@ -13,7 +13,7 @@ public class Song implements Serializable {
         super();
         //TODO Auto-generated constructor stub
     }
-    public Song(String name, int singer,  String url, int user) {
+    public Song(String name, String singer,  String url, int user) {
         this.name = name;
         this.singer = singer;
         this.url = url;
@@ -44,11 +44,11 @@ public class Song implements Serializable {
         this.name = name;
     }
 
-    public int getSinger() {
+    public String getSinger() {
         return singer;
     }
 
-    public void setSinger(int singer) {
+    public void setSinger( String singer) {
         this.singer = singer;
     }
 
