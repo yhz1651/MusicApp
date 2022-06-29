@@ -11,6 +11,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+/**
+ * 用户个人界面
+ * 包含
+ * 上传
+ * 搜索
+ * 歌曲列表
+ * 歌单
+ */
 
 public class userFragment extends Fragment {
 
@@ -23,14 +31,11 @@ public class userFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.user_fragment, container, false);
+        View view = inflater.inflate(R.layout.user_fragment,container,false);//绑定视图
+
+        return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
 }

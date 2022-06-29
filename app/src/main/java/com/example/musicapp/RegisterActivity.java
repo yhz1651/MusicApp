@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.musicapp.object.User;
 import com.example.musicapp.service.UserService;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

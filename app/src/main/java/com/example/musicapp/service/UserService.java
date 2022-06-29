@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.example.musicapp.LoginActivity;
-import com.example.musicapp.RegisterActivity;
-import com.example.musicapp.User;
+import com.example.musicapp.object.User;
 import com.example.musicapp.UserApplication;
 
 
@@ -27,7 +26,7 @@ public class UserService {
         Cursor cursor=sdb.rawQuery(sql, new String[]{username,password});
         if(cursor.moveToFirst()){
             UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();
-            application1.setValue(cursor.getInt(0));;
+            application1.setValue(cursor.getString(0));;
             Toast.makeText(LoginActivity.getInstance(),cursor.getString(0), Toast.LENGTH_LONG).show();
             cursor.close();
             return true;

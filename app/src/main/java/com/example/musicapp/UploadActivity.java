@@ -2,26 +2,24 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
-import com.example.musicapp.service.UserService;
 
-//注册界面，注册成功返回登录界面
+/**
+音乐上传Activity,用来处理用户音乐上传过程。
+ * */
 public class UploadActivity extends AppCompatActivity {
     int index;
     int s_id;
@@ -36,7 +34,7 @@ public class UploadActivity extends AppCompatActivity {
     String kind_list[] = new String[] {"摇滚","伤感","爱情","国风","日语","欧美","粤语","舒缓","佛系"};
     private void cancelBool(){
     }
-
+    //打开单选框
     public void on2click(View view) {
         Button button = findViewById(R.id.select_kind);
         if(button != null){
@@ -80,7 +78,6 @@ public class UploadActivity extends AppCompatActivity {
             aBuilder.show();
         }
     }
-    //
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_layout);
@@ -99,15 +96,15 @@ public class UploadActivity extends AppCompatActivity {
         });
         Submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String song_n= songname.getText().toString().trim();
-                String singer_n= singername.getText().toString().trim();
-                String url = url_text.getText().toString().trim();
-                DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(UploadActivity.this);
+                String song_n= songname.getText().toString().trim();//获取歌曲名字
+                String singer_n= singername.getText().toString().trim();//获取歌手名字
+                String url = url_text.getText().toString().trim();//获取歌曲url
+                DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(UploadActivity.this);//创建本地数据库操控接口
                 SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-                String sql="SELECT s_id FROM Singer WHERE s_name=?";
+                String sql="SELECT s_id FROM Singer WHERE s_name=?";//根据歌手名字查询歌手ID
                 Cursor cursor=sdb.rawQuery(sql, new String[]{singer_n});
-                UserApplication application1 = (UserApplication) UploadActivity.this.getApplication();
-                int id = application1.getValue();;
+                UserApplication application1 = (UserApplication) UploadActivity.this.getApplication();//获取application
+                String id = application1.getValue();//获得用户ID
 //                if(cursor.moveToFirst()){
 //                    s_id = cursor.getInt(0);
 //                    Toast.makeText(LoginActivity.getInstance(),cursor.getString(0), Toast.LENGTH_LONG).show();
@@ -115,23 +112,26 @@ public class UploadActivity extends AppCompatActivity {
 //                }else{
 //                    s_id = 1;
 //                }
-                Song  s = new Song(song_n,singer_n,url,id);//存入歌曲对象中
+                Music s = new Music(null,song_n,singer_n,url,id);//存入歌曲对象中
                 sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
                 Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
                 sdb.execSQL(sql, obj);
                 Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(UploadActivity.this,MainActivity.class);
+                Intent intent = new Intent(UploadActivity.this,MainActivity.class);//上传成功后，回到主页面
                 startActivity(intent);
             }
         });
     }
+    /**
+     * 回调方法，获取歌曲的uri
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1){
             if(resultCode==RESULT_OK){
                 Uri uri = data.getData();
-                Log.e("图片URI：", uri.toString());
+                //Log.e("图片URI：", uri.toString());
                 url_text.setText(uri.toString());
             }
         }

@@ -3,19 +3,19 @@ package com.example.musicapp;
 import android.app.Application;
 
 public class UserApplication extends Application {
-    private int value;
+    private String value;
 
     @Override
     public void onCreate(){
         super.onCreate();
-        value = -1;
+        value = "S1";
     }
 
-    public void setValue(int value){
+    public void setValue(String value){
         this.value = value;
     }
 
-    public int getValue(){
+    public String getValue(){
         return value;
     }
 }

@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/music"
-        android:name="com.example.musicapp.musicFragment"
+        android:name="com.example.musicapp.MainFragment"
         android:label="music_fragment"
-        tools:layout="@layout/music_fragment" />
+        tools:layout="@layout/main_fragment" />
     <fragment
         android:id="@+id/user"
         android:name="com.example.musicapp.userFragment"

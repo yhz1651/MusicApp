@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(flag){
                     Log.i("TAG","登录成功");
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,SearchMusic.class);
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }else{
                     Log.i("TAG","登录失败");

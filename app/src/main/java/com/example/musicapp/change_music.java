@@ -1,24 +1,20 @@
 package com.example.musicapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
-import com.example.musicapp.service.UserService;
 
 public class change_music extends AppCompatActivity {
     int index;
@@ -56,12 +52,12 @@ public class change_music extends AppCompatActivity {
                 String song_n= songname.getText().toString().trim();
                 String singer_n= singername.getText().toString().trim();
                 String url = url_text.getText().toString().trim();
-                DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(UploadActivity.this);
+                DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(change_music.this);
                 SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
                 String sql="SELECT s_id FROM Singer WHERE s_name=?";
                 Cursor cursor=sdb.rawQuery(sql, new String[]{singer_n});
-                UserApplication application1 = (UserApplication) UploadActivity.this.getApplication();
-                int id = application1.getValue();;
+                UserApplication application1 = (UserApplication) change_music.this.getApplication();
+                String id = application1.getValue();;
 //                if(cursor.moveToFirst()){
 //                    s_id = cursor.getInt(0);
 //                    Toast.makeText(LoginActivity.getInstance(),cursor.getString(0), Toast.LENGTH_LONG).show();
@@ -69,12 +65,12 @@ public class change_music extends AppCompatActivity {
 //                }else{
 //                    s_id = 1;
 //                }
-                Song  s = new Song(song_n,singer_n,url,id);//存入歌曲对象中
+                Music s = new Music(null,song_n,singer_n,url,id);//存入歌曲对象中
                 sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
                 Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
                 sdb.execSQL(sql, obj);
-                Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(UploadActivity.this,MainActivity.class);
+                Toast.makeText(change_music.this, "上传成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(change_music.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,4 +96,4 @@ public class change_music extends AppCompatActivity {
         Submit = (Button) findViewById(R.id.Submit);
     }
 
-}}
+}
