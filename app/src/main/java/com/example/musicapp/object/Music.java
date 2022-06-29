@@ -12,6 +12,7 @@ public class Music implements Serializable {
     private String user;//上传用户ID
     private int time;
 
+
     public Music(String id, String name, String singer, String url, String user) {//对上传信息初始化
         this.id = id;
         this.name = name;
