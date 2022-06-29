@@ -65,7 +65,7 @@ public class change_music extends AppCompatActivity {
 //                }else{
 //                    s_id = 1;
 //                }
-                Music s = new Music(null,song_n,singer_n,url,id);//存入歌曲对象中
+                Music s = new Music(null,song_n,singer_n,url,id,0);//存入歌曲对象中
                 sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
                 Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
                 sdb.execSQL(sql, obj);

@@ -102,7 +102,7 @@
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seekbar"
-            android:layout_width="230dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             />
 

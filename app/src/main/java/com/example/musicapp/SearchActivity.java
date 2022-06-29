@@ -42,7 +42,7 @@ public class SearchActivity extends AppCompatActivity {
         }
         if(cursor.moveToFirst()){
             do{
-                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),null,null);
+                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),null,null,0);
                 musicList.add(music1);
             }while(cursor.moveToNext());
             cursor.close();

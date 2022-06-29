@@ -2,12 +2,16 @@ package com.example.musicapp;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
@@ -61,7 +66,9 @@ public class playFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.play_fragment, container, false);
+        initMusicList();
         initview();
+
         return view;
     }
 
@@ -167,19 +174,6 @@ public class playFragment extends Fragment {
         });
 
         //初始化播放列表
-        musicList.clear();
-        Cursor cursor;
-        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
-        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-
-        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer,m_url"},null,null,null,null,null);
-        if(cursor.moveToFirst()){
-            do{
-                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),cursor.getString(3),null);
-                musicList.add(music1);
-            }while(cursor.moveToNext());
-            cursor.close();
-        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         MusicAdapter adapter=new MusicAdapter( musicList,getContext());
         recyclerView.setAdapter(adapter);
@@ -197,10 +191,89 @@ public class playFragment extends Fragment {
         });
 
 
+//        musicList.clear();
+//        Cursor cursor;
+//        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
+//        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
+//
+//        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer,m_url"},null,null,null,null,null);
+//        if(cursor.moveToFirst()){
+//            do{
+//                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),cursor.getString(3),null);
+//                musicList.add(music1);
+//            }while(cursor.moveToNext());
+//            cursor.close();
+//        }
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        MusicAdapter adapter=new MusicAdapter( musicList,getContext());
+//        recyclerView.setAdapter(adapter);
+//        adapter.setOnItemClickListener(new MusicAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Music music = musicList.get(position);
+//                initMediaPlayer(music);
+//            }
+//
+//            @Override
+//            public void onItemLongClick(View view, int position) {
+//
+//            }
+//        });
+
+
 
         //获取歌曲信息
 
 
+    }
+
+
+    private void initMusicList()
+    {
+        musicList.clear();
+        MediaScannerConnection.scanFile(getContext(), new String[]{Environment.getExternalStorageDirectory().getAbsolutePath()}, null, null);
+        Cursor cursor = getContext().getContentResolver().query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Audio.Media._ID,
+                        MediaStore.Audio.Media.DISPLAY_NAME,
+                        MediaStore.Audio.Media.TITLE,
+                        MediaStore.Audio.Media.DURATION,
+                        MediaStore.Audio.Media.ARTIST,
+                        MediaStore.Audio.Media.ALBUM,
+                        MediaStore.Audio.Media.SIZE,
+                        MediaStore.Audio.Media.DATA},
+                MediaStore.Audio.Media.MIME_TYPE + "=?",
+                new String[]{"audio/mpeg"}, null);
+        String fileName, title, singer,size, filePath = "";
+        int duration, m, s;
+        List<Music> musicList = new ArrayList<Music>();
+        Music song;
+
+        if (cursor.moveToFirst()) {
+            do{
+                fileName = cursor.getString(1);
+                title = cursor.getString(2);
+                duration = cursor.getInt(3);
+                singer = cursor.getString(4);
+                size = (cursor.getString(6) == null) ? "未知" : cursor.getInt(6) / 1024 / 1024 + "MB";
+                if (cursor.getString(7) != null) filePath = cursor.getString(7);
+
+                song = new Music(null,title,singer,filePath,null,duration);
+                //大于30秒的
+                if (duration > 30000) {
+                    musicList.add(song);
+                }
+            }while (cursor.moveToNext());
+            // 释放资源
+            cursor.close();
+        }
+        int len=musicList.size();
+        Toast.makeText(getContext(),"歌曲数量为"+len,Toast.LENGTH_LONG).show();// 扫描到的歌曲数量
+//        for(int i=0;i<musicList.size();i++){
+//            Music music = (Music) musicList.get(i);
+//            System.out.println(music.getName()+" "+music.getSinger()+" "+music.getDuration()+"\n");
+//
+//        }
     }
 
 

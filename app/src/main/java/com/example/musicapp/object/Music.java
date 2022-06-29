@@ -10,14 +10,23 @@ public class Music implements Serializable {
     private String kind;//类别
     private String url;//路径
     private String user;//上传用户ID
+    private int duration;
 
-
-    public Music(String id, String name, String singer, String url, String user) {//对上传信息初始化
+    public Music(String id, String name, String singer, String url, String user,int duration) {//对上传信息初始化
         this.id = id;
         this.name = name;
         this.singer = singer;
         this.url = url;
         this.user = user;
+        this.duration=duration;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public String getUser() {

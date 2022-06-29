@@ -44,7 +44,7 @@ public class admin_activity extends AppCompatActivity {
             do{
                 String song_name = cursor.getString(1);
                 String singer_name = cursor.getString(2);
-                Music Music1=new Music(cursor.getString(0), song_name,singer_name,null,null);
+                Music Music1=new Music(cursor.getString(0), song_name,singer_name,null,null,0);
                 MusicList.add(Music1);
             }while(cursor.moveToNext());
             cursor.close();
