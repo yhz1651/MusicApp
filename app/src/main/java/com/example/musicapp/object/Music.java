@@ -10,7 +10,6 @@ public class Music implements Serializable {
     private String kind;//类别
     private String url;//路径
     private String user;//上传用户ID
-    private int time;
 
 
     public Music(String id, String name, String singer, String url, String user) {//对上传信息初始化
