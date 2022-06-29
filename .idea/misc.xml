@@ -5,29 +5,32 @@
       <map>
         <entry key="..\:/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.5494791666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21354166666666666" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/frame_no_line.xml" value="0.2962962962962963" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/frame_radius.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/frame_radius_alpha.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/login_button.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/login_radius.xml" value="0.21354166666666666" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/search_radius.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/drawable/textview_radius.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_login.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_play_music.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_register.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/activity_search.xml" value="0.20989583333333334" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/admin_fragment.xml" value="0.19375" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/change_music.xml" value="0.19375" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/main_fragment.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/music_fragment.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/play_fragment.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/upload_layout.xml" value="0.42924528301886794" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/user_fragment.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/user_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/layout/welcome_layout.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/85008/AndroidStudioProjects/MusicApp/app/src/main/res/menu/menu.xml" value="0.19739583333333333" />
+        <entry key="..\:/android_musicapp/app/src/main/res/drawable/search_radius.xml" value="0.34375" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_login.xml" value="0.15932117527862208" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_play_music.xml" value="0.25" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/activity_search.xml" value="0.32760416666666664" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/admin_fragment.xml" value="0.33" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/main_fragment.xml" value="0.32760416666666664" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/music_fragment.xml" value="0.23981481481481481" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/play_fragment.xml" value="0.23981481481481481" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/upload_layout.xml" value="0.5494791666666666" />
+        <entry key="..\:/android_musicapp/app/src/main/res/layout/user_fragment.xml" value="0.23981481481481481" />
+        <entry key="..\:/android_musicapp/app/src/main/res/menu/menu.xml" value="0.32256410256410256" />
       </map>
     </option>
   </component>

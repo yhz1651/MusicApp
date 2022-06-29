@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,15 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ItemViewHold
     private List<Music> MusicList;
     private Context mContext;
     private LayoutInflater bsman = null;
+    public OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view , int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
 
     static class ItemViewHolder extends RecyclerView.ViewHolder{
@@ -69,9 +79,22 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ItemViewHold
         Music Music=MusicList.get(position);
         holder.SingerName.setText(Music.getSinger());
         holder.MusicName.setText(Music.getName());
+
+        if(listener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    listener.onItemClick(holder.itemView, pos);
+                }
+            });
+        }
+
     }
     @Override
     public int getItemCount() {
         return MusicList.size();
     }
+
+
 }
