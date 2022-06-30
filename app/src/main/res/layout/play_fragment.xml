@@ -152,10 +152,10 @@
             android:layout_marginLeft="20dp"
             />
         <Button
-            android:id="@+id/btn_music_list"
+            android:id="@+id/btn_music_comment"
             android:layout_height="50dp"
             android:layout_width="50dp"
-            android:background="@drawable/music_list"
+            android:background="@drawable/music_comment"
             android:layout_marginLeft="20dp"
             />
     </LinearLayout>
