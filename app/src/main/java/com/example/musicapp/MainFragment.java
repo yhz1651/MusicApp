@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
 
