@@ -7,33 +7,30 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".UserApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".UserApplication"
         android:theme="@style/Theme.MusicApp">
         <activity
-            android:name=".change_music"
-            android:exported="true"/>
+            android:name=".MusicListActivity"
+            android:exported="true" />
         <activity
-            android:name=".user_activity"
-            android:exported="true"/>
+            android:name=".change_music"
+            android:exported="true" />
         <activity
             android:name=".UploadActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".SearchActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PlayMusicActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -45,6 +42,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

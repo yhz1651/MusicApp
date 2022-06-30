@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.musicapp.adapter.MusicAdapter;
+import com.example.musicapp.adapter.PlayListAdapter;
 import com.example.musicapp.object.Music;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,9 +48,8 @@ public class playFragment extends Fragment {
     private Button btn_music_pre;
     private Button btn_music_play;
     private Button btn_music_next;
-    private Button btn_music_comment;
+    private Button btn_music_list;
     private RecyclerView recyclerView;
-
     private int playmode=0; // 0为列表循环，1为单曲循环，2为随机播放
     private int music_id=1;
     private List<Music> musicList =new ArrayList<Music>();
@@ -55,11 +58,19 @@ public class playFragment extends Fragment {
     private boolean seekbarchange=false;
 
     private View view;
+    private PlayViewModel PlayViewModel;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.play_fragment, container, false);
-        initMusicList();
+        PlayViewModel = new ViewModelProvider(
+                requireActivity(),
+                new ViewModelProvider.NewInstanceFactory()).get(PlayViewModel.class);
+        musicList = PlayViewModel.getSelectMusic().getValue();
+        if(musicList==null){
+            musicList=new ArrayList<Music>();
+            initMusicList();
+        }
         initview();
 
         return view;
@@ -76,7 +87,7 @@ public class playFragment extends Fragment {
         btn_music_pre=view.findViewById(R.id.btn_music_pre);
         btn_music_play=view.findViewById(R.id.btn_music_play);
         btn_music_next=view.findViewById(R.id.btn_music_next);
-        btn_music_comment=view.findViewById(R.id.btn_music_comment);
+        btn_music_list=view.findViewById(R.id.btn_music_list);
         recyclerView =view.findViewById(R.id.recyclerView);
 
 
@@ -128,6 +139,7 @@ public class playFragment extends Fragment {
                 }
             }
         });
+        //播放方式
         btn_music_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,11 +178,11 @@ public class playFragment extends Fragment {
             }
         });
 
-        //初始化播放列表
+        //绑定adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MusicAdapter adapter=new MusicAdapter( musicList,getContext());
+        PlayListAdapter adapter=new PlayListAdapter( musicList,getContext());
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new MusicAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new PlayListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Music music = musicList.get(position);
@@ -183,39 +195,6 @@ public class playFragment extends Fragment {
             }
         });
 
-
-//        musicList.clear();
-//        Cursor cursor;
-//        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
-//        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-//
-//        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer,m_url"},null,null,null,null,null);
-//        if(cursor.moveToFirst()){
-//            do{
-//                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),cursor.getString(3),null);
-//                musicList.add(music1);
-//            }while(cursor.moveToNext());
-//            cursor.close();
-//        }
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        MusicAdapter adapter=new MusicAdapter( musicList,getContext());
-//        recyclerView.setAdapter(adapter);
-//        adapter.setOnItemClickListener(new MusicAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                Music music = musicList.get(position);
-//                initMediaPlayer(music);
-//            }
-//
-//            @Override
-//            public void onItemLongClick(View view, int position) {
-//
-//            }
-//        });
-
-
-
-        //获取歌曲信息
 
 
     }
@@ -249,7 +228,7 @@ public class playFragment extends Fragment {
                 singer = cursor.getString(4);
                 size = (cursor.getString(6) == null) ? "未知" : cursor.getInt(6) / 1024 / 1024 + "MB";
                 if (cursor.getString(7) != null) filePath = cursor.getString(7);
-
+                System.out.println(filePath);
                 song = new Music(null,title,singer,filePath,null,duration);
                 musicList.add(song);
                 //大于30秒的
@@ -261,12 +240,12 @@ public class playFragment extends Fragment {
             cursor.close();
         }
         int len=musicList.size();
-        Toast.makeText(getContext(),"歌曲数量为"+len,Toast.LENGTH_LONG).show();// 扫描到的歌曲数量
-        for(int i=0;i<musicList.size();i++){
-            Music music = (Music) musicList.get(i);
-            System.out.println(music.getName()+" "+music.getSinger()+" "+music.getDuration()+"\n");
-
-        }
+        Toast.makeText(getContext(),"歌曲数量为"+len,Toast.LENGTH_SHORT).show();// 扫描到的歌曲数量
+//        for(int i=0;i<musicList.size();i++){//用于测试读取的歌曲
+//            Music music = (Music) musicList.get(i);
+//            System.out.println(music.getName()+" "+music.getSinger()+" "+music.getDuration()+"\n");
+//
+//        }
     }
 
 
@@ -294,23 +273,32 @@ public class playFragment extends Fragment {
             mediaplayer.setDataSource(music.getUrl());
             mediaplayer.prepare();
             mediaplayer.start();
-//            int m = music.getDuration() / 60000;
-//            int s = (music.getDuration() - m * 60000) / 1000;
-            int m = 5;
-            int s = 0;
-            end_time.setText(m + ":" + s );
+            int m = music.getDuration() / 60000;
+            int s = (music.getDuration() - m * 60000) / 1000;
+            DecimalFormat decimalFormat = new DecimalFormat("00");
+
+            String m2= decimalFormat .format(m);
+            String s2 = decimalFormat .format(s);
+            end_time.setText(m2 + ":" + s2 );
             music_name.setText(music.getName());
-//            seekBar.setMax(music.getDuration());
-            seekBar.setMax(5*60000);
+            music_singer.setText(music.getSinger());
+            seekBar.setMax(music.getDuration());
+
 
             Handler handler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
+                    try{
                     if (seekbarchange) return;
                     seekBar.setProgress(mediaplayer.getCurrentPosition());
                     int m = mediaplayer.getCurrentPosition() / 60000;
                     int s = (mediaplayer.getCurrentPosition() - m * 60000) / 1000;
-                    start_time.setText(m + ":" + s );
+                    String m1= decimalFormat .format(m);
+                    String s1 = decimalFormat .format(s);
+                    start_time.setText(m1 + ":" + s1 );}
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             };
             new Thread(new Runnable() {

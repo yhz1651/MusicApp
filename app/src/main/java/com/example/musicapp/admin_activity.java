@@ -83,13 +83,7 @@ public class admin_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ImageView uspage = (ImageView) findViewById(R.id.userpage) ;
-        songa.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent=new Intent(admin_activity.this, user_activity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
 

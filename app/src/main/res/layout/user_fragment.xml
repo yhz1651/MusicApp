@@ -192,18 +192,31 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
+            android:layout_marginBottom="30dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/frame_no_line">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#000000"
-                android:text="我上传的歌曲"
+                android:text="本地歌曲"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+                <Button
+                    android:id="@+id/paly_all"
+                    android:layout_marginLeft="200dp"
+                    android:layout_width="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/blue"
+                    android:layout_height="30dp" />
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"

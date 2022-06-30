@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,20 @@ import android.content.DialogInterface;
 
 import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
+import com.example.musicapp.tool.UriTool;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
 音乐上传Activity,用来处理用户音乐上传过程。
@@ -23,6 +38,7 @@ import com.example.musicapp.service.DatabaseHelper;
 public class UploadActivity extends AppCompatActivity {
     int index;
     int s_id;
+    Music s=null;
     EditText songname;
     EditText singername;
     EditText songkind;
@@ -112,10 +128,11 @@ public class UploadActivity extends AppCompatActivity {
 //                }else{
 //                    s_id = 1;
 //                }
-                Music s = new Music(null,song_n,singer_n,url,id,0);//存入歌曲对象中
+                s = new Music(null,song_n,singer_n,url,id,0);//存入歌曲对象中
                 sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
                 Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
                 sdb.execSQL(sql, obj);
+                upload();
                 Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(UploadActivity.this,MainActivity.class);//上传成功后，回到主页面
                 startActivity(intent);
@@ -132,9 +149,54 @@ public class UploadActivity extends AppCompatActivity {
             if(resultCode==RESULT_OK){
                 Uri uri = data.getData();
                 //Log.e("图片URI：", uri.toString());
-                url_text.setText(uri.toString());
+                UriTool ut=new UriTool();
+                url_text.setText(ut.UriToPath(this, uri));
             }
         }
+    }
+    private void upload(){
+        new Thread(new Runnable() {//使用多线程，防止主线程堵塞
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Uri uri = Uri.parse(s.getUrl());
+                File file = new File(String.valueOf(uri));
+                String filename = s.getUrl().substring(s.getUrl().lastIndexOf("/") + 1);
+
+                RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+                RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
+                        .setType(MultipartBody.FORM)
+                        .addPart(Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"getUpTime\""),
+                                RequestBody.create(null, "2022-6-29"))
+                        .addPart(Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"originalData\"; filename=\"" + filename + "\""), fileBody)
+                        .build();
+                String url = "http://192.168.1.104:7506/solution";
+                System.out.println("----------------------------------------------------");
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(requestBody)
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {//回调方法
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("text", "failure upload!" + e.getMessage());
+                    }
+
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Log.i("text", "success upload!");
+                        String json = response.body().string();
+                        Log.i("success........", "成功" + json);
+                    }
+                });
+            }
+        }).start();
     }
     private void findViews() {
         songname =(EditText) findViewById(R.id.song_name);

@@ -9,15 +9,30 @@
         android:id="@+id/music"
         android:name="com.example.musicapp.MainFragment"
         android:label="music_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_music_to_play"
+            app:destination="@id/play" />
+    </fragment>
     <fragment
         android:id="@+id/user"
         android:name="com.example.musicapp.userFragment"
         android:label="user_fragment"
-        tools:layout="@layout/user_fragment" />
+        tools:layout="@layout/user_fragment" >
+        <action
+            android:id="@+id/action_user_to_play"
+            app:destination="@id/play" />
+    </fragment>
     <fragment
         android:id="@+id/play"
         android:name="com.example.musicapp.playFragment"
         android:label="play_fragment"
-        tools:layout="@layout/play_fragment" />
+        tools:layout="@layout/play_fragment" >
+        <action
+            android:id="@+id/action_play_to_user"
+            app:destination="@id/user" />
+        <action
+            android:id="@+id/action_play_to_music"
+            app:destination="@id/music" />
+    </fragment>
 </navigation>
