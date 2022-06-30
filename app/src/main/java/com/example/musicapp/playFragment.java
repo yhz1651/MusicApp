@@ -1,7 +1,5 @@
 package com.example.musicapp;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 
@@ -11,29 +9,24 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.object.Music;
-import com.example.musicapp.service.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,7 +239,6 @@ public class playFragment extends Fragment {
                 new String[]{"audio/mpeg"}, null);
         String fileName, title, singer,size, filePath = "";
         int duration, m, s;
-        List<Music> musicList = new ArrayList<Music>();
         Music song;
 
         if (cursor.moveToFirst()) {
@@ -259,21 +251,22 @@ public class playFragment extends Fragment {
                 if (cursor.getString(7) != null) filePath = cursor.getString(7);
 
                 song = new Music(null,title,singer,filePath,null,duration);
+                musicList.add(song);
                 //大于30秒的
-                if (duration > 30000) {
-                    musicList.add(song);
-                }
+//                if (duration > 30000) {
+//                    musicList.add(song);
+//                }
             }while (cursor.moveToNext());
             // 释放资源
             cursor.close();
         }
         int len=musicList.size();
         Toast.makeText(getContext(),"歌曲数量为"+len,Toast.LENGTH_LONG).show();// 扫描到的歌曲数量
-//        for(int i=0;i<musicList.size();i++){
-//            Music music = (Music) musicList.get(i);
-//            System.out.println(music.getName()+" "+music.getSinger()+" "+music.getDuration()+"\n");
-//
-//        }
+        for(int i=0;i<musicList.size();i++){
+            Music music = (Music) musicList.get(i);
+            System.out.println(music.getName()+" "+music.getSinger()+" "+music.getDuration()+"\n");
+
+        }
     }
 
 

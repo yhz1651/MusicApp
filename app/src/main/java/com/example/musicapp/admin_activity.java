@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
 
