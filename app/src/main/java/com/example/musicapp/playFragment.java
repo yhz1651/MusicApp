@@ -44,7 +44,7 @@ public class playFragment extends Fragment {
     private Button btn_music_pre;
     private Button btn_music_play;
     private Button btn_music_next;
-    private Button btn_music_list;
+    private Button btn_music_comment;
     private RecyclerView recyclerView;
 
     private int playmode=0; // 0为列表循环，1为单曲循环，2为随机播放
@@ -76,7 +76,7 @@ public class playFragment extends Fragment {
         btn_music_pre=view.findViewById(R.id.btn_music_pre);
         btn_music_play=view.findViewById(R.id.btn_music_play);
         btn_music_next=view.findViewById(R.id.btn_music_next);
-        btn_music_list=view.findViewById(R.id.btn_music_list);
+        btn_music_comment=view.findViewById(R.id.btn_music_comment);
         recyclerView =view.findViewById(R.id.recyclerView);
 
 
