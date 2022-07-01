@@ -1,8 +1,13 @@
 package com.example.musicapp;
 
 //登录界面，登录成功进入主界面
+import android.Manifest;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -12,9 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.musicapp.service.DatabaseHelper;
 import com.example.musicapp.service.UserService;
-import com.example.musicapp.tool.Sqltool;
 
 public class LoginActivity extends AppCompatActivity {
     private static LoginActivity instance;
@@ -33,8 +36,13 @@ public class LoginActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+    if(ContextCompat.checkSelfPermission(this,//动态申请内存访问权限
+      Manifest.permission.READ_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED){
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
     }
-
+}
     private EditText username;
     private EditText password;
     private Button login;
@@ -56,16 +64,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 Log.i("TAG",name+"_"+pass);
                 UserService uService=new UserService(LoginActivity.this);
-                boolean flag=uService.login(name, pass);
+                String flag=uService.login(name, pass);
 
-                if(flag){
+                if(!flag.equals("false")){//如果不是返回false即登录成功
                     Log.i("TAG","登录成功");
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
+                    UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();//将用户名存入Application
+                    application1.setValue(flag);
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    Intent intent;
+                    if(flag.equals("1234"))
+                    {intent = new Intent(LoginActivity.this, AdminActivity.class);
+                    startActivity(intent);}//管理员账号进入管理页面
+                    else{
+                    intent = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);}
                 }else{
                     Log.i("TAG","登录失败");
-                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });

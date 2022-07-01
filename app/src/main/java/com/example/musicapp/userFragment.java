@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,17 +30,26 @@ import android.widget.Toast;
 import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.object.Music;
 import com.example.musicapp.object.MusicList;
+import com.example.musicapp.tool.DownloadTool;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 用户个人界面
- * 包含
- * 上传
- * 搜索
- * 歌曲列表
- * 歌单
+ 包含上传、本地歌曲列表、歌单、修改用户信息等功能
+ @author lc
  */
 public class userFragment extends Fragment {
     private PlayViewModel viewModel;
@@ -58,7 +68,7 @@ public class userFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MusicAdapter(MusicList,getContext()) );
         ImageButton search_btn = view.findViewById(R.id.search) ;
-        search_btn.setOnClickListener(new View.OnClickListener() {
+        search_btn.setOnClickListener(new View.OnClickListener() {//跳转搜索activity
             public void onClick(View v) {
                 TextView tex = view.findViewById(R.id.s_key);
                 Intent intent=new Intent(getContext(), SearchActivity.class);
@@ -81,14 +91,14 @@ public class userFragment extends Fragment {
             }
         });
         Button play_button = view.findViewById(R.id.paly_all);
-        play_button.setOnClickListener(new View.OnClickListener() {//点击播放按钮，写ViewModel
+        play_button.setOnClickListener(new View.OnClickListener() {//点击播放按钮，将歌单存入ViewModel，跳转到播放页面
             public void onClick(View v) {
                 viewModel = new ViewModelProvider(
                         requireActivity(),
                         new ViewModelProvider.NewInstanceFactory()).get(PlayViewModel.class);
                 viewModel.setSelectMusic(MusicList);
                 NavController controller= Navigation.findNavController(view);
-                controller.popBackStack();
+                controller.popBackStack();//出栈，非常重要，否则会出现点击导航栏时，该fragment无法跳转的情况
                 controller.navigate(R.id.play);
             }
         });
@@ -142,6 +152,5 @@ public class userFragment extends Fragment {
 //
 //        }
     }
-
 
 }

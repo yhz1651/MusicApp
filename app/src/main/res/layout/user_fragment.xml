@@ -88,9 +88,16 @@
             android:textStyle="bold" />
             <ImageButton
                 android:layout_gravity="center"
+                android:id="@+id/changeinfo"
+                android:background="@drawable/changeuserinfo"
+                android:layout_marginLeft="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"/>
+            <ImageButton
+                android:layout_gravity="center"
                 android:id="@+id/change_user"
                 android:background="@drawable/changeuser"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp">
             </ImageButton>

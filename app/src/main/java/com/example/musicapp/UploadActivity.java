@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.content.DialogInterface;
 
 import com.example.musicapp.object.Music;
 import com.example.musicapp.service.DatabaseHelper;
+import com.example.musicapp.tool.DownloadTool;
 import com.example.musicapp.tool.UriTool;
 
 import java.io.File;
@@ -34,16 +38,21 @@ import okhttp3.Response;
 
 /**
 音乐上传Activity,用来处理用户音乐上传过程。
+ 通过选择歌曲，获取歌曲的歌名，歌手，时常，地址等信息
+ 并将信息封装，通过OKHTTP发送到服务器
  * */
 public class UploadActivity extends AppCompatActivity {
     int index;
     int s_id;
+    String user_id;
     Music s=null;
     EditText songname;
     EditText singername;
     EditText songkind;
     EditText url_text;
     Button searchfile;
+    int duration;
+    int lenth=0;
     Button select_kind;
     Button Submit;
     String txt = "";
@@ -115,12 +124,9 @@ public class UploadActivity extends AppCompatActivity {
                 String song_n= songname.getText().toString().trim();//获取歌曲名字
                 String singer_n= singername.getText().toString().trim();//获取歌手名字
                 String url = url_text.getText().toString().trim();//获取歌曲url
-                DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(UploadActivity.this);//创建本地数据库操控接口
-                SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-                String sql="SELECT s_id FROM Singer WHERE s_name=?";//根据歌手名字查询歌手ID
-                Cursor cursor=sdb.rawQuery(sql, new String[]{singer_n});
+
                 UserApplication application1 = (UserApplication) UploadActivity.this.getApplication();//获取application
-                String id = application1.getValue();//获得用户ID
+                user_id = application1.getValue();//获得用户ID
 //                if(cursor.moveToFirst()){
 //                    s_id = cursor.getInt(0);
 //                    Toast.makeText(LoginActivity.getInstance(),cursor.getString(0), Toast.LENGTH_LONG).show();
@@ -128,10 +134,6 @@ public class UploadActivity extends AppCompatActivity {
 //                }else{
 //                    s_id = 1;
 //                }
-                s = new Music(null,song_n,singer_n,url,id,0);//存入歌曲对象中
-                sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
-                Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
-                sdb.execSQL(sql, obj);
                 upload();
                 Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(UploadActivity.this,MainActivity.class);//上传成功后，回到主页面
@@ -148,9 +150,38 @@ public class UploadActivity extends AppCompatActivity {
         if(requestCode==1){
             if(resultCode==RESULT_OK){
                 Uri uri = data.getData();
-                //Log.e("图片URI：", uri.toString());
+
                 UriTool ut=new UriTool();
-                url_text.setText(ut.UriToPath(this, uri));
+                String true_path= ut.UriToPath(this, uri);
+                MediaScannerConnection.scanFile(this, new String[]{Environment.getExternalStorageDirectory().getAbsolutePath()}, null, null);
+                Cursor cursor = this.getContentResolver().query(//根据文件地址搜索歌曲信息
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                        new String[]{MediaStore.Audio.Media._ID,
+                                MediaStore.Audio.Media.DISPLAY_NAME,
+                                MediaStore.Audio.Media.TITLE,
+                                MediaStore.Audio.Media.DURATION,
+                                MediaStore.Audio.Media.ARTIST,
+                                MediaStore.Audio.Media.ALBUM,
+                                MediaStore.Audio.Media.SIZE,
+                                MediaStore.Audio.Media.DATA},
+                        MediaStore.Audio.Media.DATA + "=?",
+                        new String[]{true_path}, null);
+                if (cursor.moveToFirst()) {
+                    do{
+                        String title = cursor.getString(2);
+                        duration = cursor.getInt(3);
+                        String singer = cursor.getString(4);
+                        String size = (cursor.getString(6) == null) ? "未知" : cursor.getInt(6) / 1024 / 1024 + "MB";
+                        s = new Music(null,title,singer,true_path,user_id,duration);
+                    }while (cursor.moveToNext());
+                    // 释放资源
+                    cursor.close();
+                }
+                url_text.setText(true_path);
+                if(s!=null){
+                    songname.setText(s.getM_name());
+                    singername.setText(s.getM_singer());
+                }
             }
         }
     }
@@ -159,22 +190,38 @@ public class UploadActivity extends AppCompatActivity {
             @Override
             public void run() {
                 OkHttpClient okHttpClient = new OkHttpClient();
-                Uri uri = Uri.parse(s.getUrl());
+                Uri uri = Uri.parse(s.getM_url());
                 File file = new File(String.valueOf(uri));
-                String filename = s.getUrl().substring(s.getUrl().lastIndexOf("/") + 1);
+                String filename = s.getM_url().substring(s.getM_url().lastIndexOf("/") + 1);
 
                 RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
                 RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
                         .setType(MultipartBody.FORM)
-                        .addPart(Headers.of(
+                        .addPart(Headers.of(//上传时间
                                 "Content-Disposition",
                                 "form-data; name=\"getUpTime\""),
                                 RequestBody.create(null, "2022-6-29"))
                         .addPart(Headers.of(
                                 "Content-Disposition",
+                                "form-data; name=\"m_name\""),
+                                RequestBody.create(null, s.getM_name()))
+                        .addPart(Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"m_singer\""),
+                                RequestBody.create(null, s.getM_singer()))
+                        .addPart(Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"m_duration\""),
+                                RequestBody.create(null, duration+""))
+                        .addPart(Headers.of(
+                                "Content-Disposition",
+                                "form-data; name=\"m_userid\""),
+                                RequestBody.create(null, user_id))
+                        .addPart(Headers.of(
+                                "Content-Disposition",
                                 "form-data; name=\"originalData\"; filename=\"" + filename + "\""), fileBody)
                         .build();
-                String url = "http://192.168.1.104:7506/solution";
+                String url = DownloadTool.url+"/solution";
                 System.out.println("----------------------------------------------------");
                 Request request = new Request.Builder()
                         .url(url)
@@ -192,7 +239,12 @@ public class UploadActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         Log.i("text", "success upload!");
                         String json = response.body().string();
-                        Log.i("success........", "成功" + json);
+                        Log.i("success........", "成功" + json);//上传成功后插入到本地歌曲表
+                        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(UploadActivity.this);//创建本地数据库操控接口
+                        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
+                        String sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid,m_duration) values(?,?,?,0,?,?);";
+                        Object obj[]={s.getM_name(),s.getM_url(),s.getM_singer(),s.getM_userid(),duration};
+                        sdb.execSQL(sql, obj);
                     }
                 });
             }

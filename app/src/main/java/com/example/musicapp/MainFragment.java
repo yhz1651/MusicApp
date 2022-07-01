@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,33 @@ import android.widget.TextView;
 
 import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.object.Music;
+import com.example.musicapp.object.User;
 import com.example.musicapp.service.DatabaseHelper;
+import com.example.musicapp.service.UserService;
+import com.example.musicapp.tool.DownloadTool;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 /**
  * 主页面
 * */
 public class MainFragment extends Fragment {
-
+    private String ans;
     private MainViewModel mViewModel;
     private List<Music> musicList =new ArrayList<Music>();
     private RecyclerView recyclerView;
@@ -49,18 +68,19 @@ public class MainFragment extends Fragment {
 //        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // TODO: Use the ViewModel
         musicList.clear();
-        Cursor cursor;
-        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
-        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-
-        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer"},null,null,null,null,null);
-        if(cursor.moveToFirst()){
-            do{
-                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),null,null,0);
-                musicList.add(music1);
-            }while(cursor.moveToNext());
-            cursor.close();
-        }
+        ask();//调用网络请求，请求歌曲列表
+//        Cursor cursor;
+//        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
+//        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
+//
+//        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer"},null,null,null,null,null);
+//        if(cursor.moveToFirst()){
+//            do{
+//                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),null,null,0);
+//                musicList.add(music1);
+//            }while(cursor.moveToNext());
+//            cursor.close();
+//        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MusicAdapter( musicList,getContext()));
         search_btn.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +98,66 @@ public class MainFragment extends Fragment {
         });
         return view;
     }
+    public void  ask(){
+        askMusic callable = new askMusic();
+        //将实现Callable接口的对象作为参数创建一个FutureTask对象
+        FutureTask<String> task = new FutureTask<>(callable);
+        //创建线程处理当前callable任务
+        Thread thread = new Thread(task);
+        //开启线程
+        thread.start();
+        //获取到call方法的返回值
+        try {
+            String result = task.get();
+            ans=result;
+            Log.e("text", "result" +ans );
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    jsonToList(ans);
+    }
+    class askMusic implements Callable<String>
+    {   String ans;
+        @Override
+        public String call() throws Exception {//创建带回调方法的线程进行网络请求
+            OkHttpClient okHttpClient = new OkHttpClient();
+            RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
+                    .setType(MultipartBody.FORM)//传参
+                    .addPart(Headers.of(
+                            "Content-Disposition",
+                            "form-data; name=\"u_username\""),
+                            RequestBody.create(null, "ss"))
+                    .build();
+            String url = DownloadTool.url +"/askMusic";
+            System.out.println("----------------------------------------------------");
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+            Call call = okHttpClient.newCall(request);
+            call.enqueue(new Callback() {//回调方法
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.e("text", "failure upload!" + e.getMessage());
+                }
 
 
-
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.i("text", "success upload!");
+                    ans = response.body().string();
+                }
+            });
+            Thread.sleep(3000);
+            return ans;
+        }
+    }
+    public  void jsonToList(String json) {
+        Gson gson = new Gson();
+        musicList = gson.fromJson(json, new TypeToken<List<Music>>() {}.getType());//对于不是类的情况，用这个参数给出
+        for (Music music1 : musicList) {
+            System.out.println(music1.getM_name()+" "+music1.getM_singer());
+        }
+    }
 }

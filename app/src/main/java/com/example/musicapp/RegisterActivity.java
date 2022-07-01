@@ -108,16 +108,23 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.i("TAG",name+"_"+pass+"_"+xingqustr+"_"+sexstr);
                 UserService uService=new UserService(RegisterActivity.this);
                 User user=new User();
-                user.setUsername(name);
-                user.setPassword(pass);
-                user.setSex(sexstr);
-                user.setAge(ag);
-                user.setPhone(ph);
-                user.setXingqu(xingqustr);
-                uService.register(user);
-                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+                user.setU_username(name);
+                user.setU_password(pass);
+                user.setU_sex(sexstr);
+                user.setU_age(ag);
+                user.setU_phone(ph);
+                user.setU_hobby(xingqustr);
+                String ans = uService.register(user);//调用注册处理接口，向服务器发送请求，等待返回值
+                if(ans.equals("false")){
+                    Toast.makeText(RegisterActivity.this, "该账号已注册", Toast.LENGTH_SHORT).show();
+                }else{
+                    UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();
+                    application1.setValue(ans);;
+                    Toast.makeText(RegisterActivity.this, "成功注册", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+
+                    startActivity(intent);
+                }
             }
         });
        back.setOnClickListener(new View.OnClickListener() {

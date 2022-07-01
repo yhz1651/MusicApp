@@ -60,7 +60,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ItemViewHold
                 int index=itemViewHolder.getAdapterPosition();
                 Music Music=MusicList.get(index);
                 Intent intent=new Intent(mContext, RegisterActivity.class);
-                intent.putExtra("key",Music.getName());
+                intent.putExtra("key",Music.getM_name());
                 mContext.startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ItemViewHold
                 int index=itemViewHolder.getAdapterPosition();
                 Music Music=MusicList.get(index);
                 Toast.makeText(v.getContext(),
-                        "你点击了："+Music.getName(),Toast.LENGTH_LONG).show();
+                        "你点击了："+Music.getM_name(),Toast.LENGTH_LONG).show();
             }
         });
         return itemViewHolder;
@@ -78,8 +78,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ItemViewHold
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {//绑定view
         Music Music=MusicList.get(position);
-        holder.SingerName.setText(Music.getSinger());
-        holder.MusicName.setText(Music.getName());
+        holder.SingerName.setText(Music.getM_singer());
+        holder.MusicName.setText(Music.getM_name());
 
         if(listener != null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {

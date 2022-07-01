@@ -83,7 +83,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:textColor="#000000"
-            android:text="18767786828"
+            android:text="管理用户"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -179,6 +179,34 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:id="@+id/comment_number"
+                android:layout_marginBottom="15dp"
+                android:textColor="#000000"
+                android:text="用户管理"
+                android:layout_weight="3"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab4"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/frame_no_line" >
+            <ImageView
+                android:background="@drawable/singer_icon"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/singer_manage"
+                android:layout_gravity="center"
+                android:layout_width="70dp"
+                android:layout_weight="1"
+                android:layout_height="90dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/singernumber"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000"
                 android:text="用户管理"

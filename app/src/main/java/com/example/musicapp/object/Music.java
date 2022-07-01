@@ -4,61 +4,61 @@ package com.example.musicapp.object;
 import java.io.Serializable;
 
 public class Music implements Serializable {
-    private String id;//歌曲ID
-    private String name;//歌曲名
-    private String singer;//歌手名
+    private String m_id;//歌曲ID
+    private String m_name;//歌曲名
+    private String m_singer;//歌手名
     private String kind;//类别
-    private String url;//路径
-    private String user;//上传用户ID
-    private int duration;
+    private String m_url;//路径
+    private String m_userid;//上传用户ID
+    private int m_duration;
 
     public Music(String id, String name, String singer, String url, String user,int duration) {//对上传信息初始化
-        this.id = id;
-        this.name = name;
-        this.singer = singer;
-        this.url = url;
-        this.user = user;
-        this.duration=duration;
+        this.m_id = id;
+        this.m_name = name;
+        this.m_singer = singer;
+        this.m_url = url;
+        this.m_userid = user;
+        this.m_duration =duration;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getM_duration() {
+        return m_duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setM_duration(int m_duration) {
+        this.m_duration = m_duration;
     }
 
-    public String getUser() {
-        return user;
+    public String getM_userid() {
+        return m_userid;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setM_userid(String m_userid) {
+        this.m_userid = m_userid;
     }
 
-    public String getId() {
-        return id;
+    public String getM_id() {
+        return m_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setM_id(String m_id) {
+        this.m_id = m_id;
     }
 
-    public String getName() {
-        return name;
+    public String getM_name() {
+        return m_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setM_name(String m_name) {
+        this.m_name = m_name;
     }
 
-    public String getSinger() {
-        return singer;
+    public String getM_singer() {
+        return m_singer;
     }
 
-    public void setSinger( String singer) {
-        this.singer = singer;
+    public void setM_singer(String m_singer) {
+        this.m_singer = m_singer;
     }
 
     public String getKind() {
@@ -69,12 +69,12 @@ public class Music implements Serializable {
         this.kind = kind;
     }
 
-    public String getUrl() {
-        return url;
+    public String getM_url() {
+        return m_url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setM_url(String m_url) {
+        this.m_url = m_url;
     }
 
 

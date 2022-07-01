@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.musicapp.adapter.MusicAdapter;
 import com.example.musicapp.adapter.PlayListAdapter;
 import com.example.musicapp.object.Music;
 
@@ -270,20 +268,20 @@ public class playFragment extends Fragment {
                 }
             });
             mediaplayer.reset();
-            mediaplayer.setDataSource(music.getUrl());
+            mediaplayer.setDataSource(music.getM_url());
             mediaplayer.prepare();
             mediaplayer.start();
-            int m = music.getDuration() / 60000;
-            int s = (music.getDuration() - m * 60000) / 1000;
+            int m = music.getM_duration() / 60000;
+            int s = (music.getM_duration() - m * 60000) / 1000;
             DecimalFormat decimalFormat = new DecimalFormat("00");
 
             String m2= decimalFormat .format(m);
             String s2 = decimalFormat .format(s);
             end_time.setText(m2 + ":" + s2 );
-            music_name.setText(music.getName());
-            music_singer.setText(music.getSinger());
-            seekBar.setMax(music.getDuration());
-
+            music_name.setText(music.getM_name());
+            music_singer.setText(music.getM_singer());
+            seekBar.setMax(music.getM_duration());
+            Toast.makeText(getContext(),music.getM_url(),Toast.LENGTH_SHORT);
 
             Handler handler = new Handler(){
                 @Override
@@ -298,6 +296,7 @@ public class playFragment extends Fragment {
                     start_time.setText(m1 + ":" + s1 );}
                     catch (Exception e) {
                         e.printStackTrace();
+                        return;
                     }
                 }
             };

@@ -67,7 +67,7 @@ public class change_music extends AppCompatActivity {
 //                }
                 Music s = new Music(null,song_n,singer_n,url,id,0);//存入歌曲对象中
                 sql="insert into Music(m_name,m_url,m_singer,m_type,m_userid) values(?,?,?,0,?);";
-                Object obj[]={s.getName(),s.getUrl(),s.getSinger(),s.getUser()};
+                Object obj[]={s.getM_name(),s.getM_url(),s.getM_singer(),s.getM_userid()};
                 sdb.execSQL(sql, obj);
                 Toast.makeText(change_music.this, "上传成功", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(change_music.this,MainActivity.class);
