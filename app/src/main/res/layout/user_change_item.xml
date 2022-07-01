@@ -24,7 +24,7 @@
             android:text="许嵩"
             android:textColor="#000000"
             android:layout_height="wrap_content"
-            android:id="@+id/singername" />
+            android:id="@+id/username" />
 
     </LinearLayout>
     <LinearLayout
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/change_singer_button"
+                android:id="@+id/change_user_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"

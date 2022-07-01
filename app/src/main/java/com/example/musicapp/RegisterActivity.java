@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText xingquregister;
     Button register;
     TextView back;
-    //
     String txt = "";
     //
     String strList[] = new String[] {"摇滚","伤感","爱情","国风","日语","欧美","粤语","舒缓","佛系"};
@@ -122,7 +121,6 @@ public class RegisterActivity extends AppCompatActivity {
                     application1.setValue(ans);;
                     Toast.makeText(RegisterActivity.this, "成功注册", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-
                     startActivity(intent);
                 }
             }

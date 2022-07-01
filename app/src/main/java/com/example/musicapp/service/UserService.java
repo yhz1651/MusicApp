@@ -31,7 +31,7 @@ public class UserService {
     public static DatabaseHelper getDbHelper() {
         return dbHelper;
     }
-    public String ans;
+    public  String ans;
     private String u_name;
     private String u_password;
     public UserService(Context context){
@@ -117,7 +117,9 @@ public class UserService {
                     ans = response.body().string();
                 }
             });
-            Thread.sleep(3000);
+            while(ans==null){
+
+            }
             return ans;
         }
     }
@@ -173,7 +175,9 @@ public class UserService {
                     ans = response.body().string();
                 }
             });
-            Thread.sleep(3000);
+            while(ans==null){
+
+            }
             return ans;
         }
     }

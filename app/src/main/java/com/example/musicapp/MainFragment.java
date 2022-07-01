@@ -69,18 +69,6 @@ public class MainFragment extends Fragment {
         // TODO: Use the ViewModel
         musicList.clear();
         ask();//调用网络请求，请求歌曲列表
-//        Cursor cursor;
-//        DatabaseHelper dbsqLiteOpenHelper = new DatabaseHelper(getContext());
-//        SQLiteDatabase sdb = dbsqLiteOpenHelper.getWritableDatabase();
-//
-//        cursor=sdb.query("Music",new String[]{"m_id,m_name,m_singer"},null,null,null,null,null);
-//        if(cursor.moveToFirst()){
-//            do{
-//                Music music1 =new Music(cursor.getString(0), cursor.getString(1),cursor.getString(2),null,null,0);
-//                musicList.add(music1);
-//            }while(cursor.moveToNext());
-//            cursor.close();
-//        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MusicAdapter( musicList,getContext()));
         search_btn.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +137,7 @@ public class MainFragment extends Fragment {
                     ans = response.body().string();
                 }
             });
-            Thread.sleep(3000);
+            while(ans==null){}//等待赋值
             return ans;
         }
     }

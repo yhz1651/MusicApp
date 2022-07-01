@@ -9,20 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.musicapp.ChangeSinger;
+import com.example.musicapp.ChangeUserInfoActivity;
 import com.example.musicapp.R;
-import com.example.musicapp.object.Singer;
-/**
- * 播放列表的Adapter
- * 用以绑定歌曲信息和RecyclerView
- * 点击DELETE删除
- */
-public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ItemViewHolder> {
-    private List<Singer> SingerList;
+import com.example.musicapp.object.User;
+import com.example.musicapp.object.User;
+
+import java.util.List;
+
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ItemViewHolder> {
+    private List<User> UserList;
     private Context mContext;
     private LayoutInflater bsman = null;
     public OnItemClickListener listener;
@@ -37,33 +34,31 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ItemViewHo
 
 
     static class ItemViewHolder extends RecyclerView.ViewHolder{
-        public ImageView change_singer_button;
-        private TextView SingerName;
+        public ImageView change_User_button;
+        private TextView UserName;
         public ItemViewHolder(View itemView) {
             super(itemView);
-            SingerName =(TextView) itemView.findViewById(R.id.singername);
-            change_singer_button =(ImageView) itemView.findViewById(R.id.change_singer_button);
+            UserName =(TextView) itemView.findViewById(R.id.username);
+            change_User_button =(ImageView) itemView.findViewById(R.id.change_user_button);
         }
     }
-    public SingerAdapter(List<Singer> SingerList,Context context) {
-        this.SingerList = SingerList;
+    public UserAdapter(List<User> UserList,Context context) {
+        this.UserList = UserList;
         this.mContext = context;
         bsman = LayoutInflater.from(context);
     }
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.singer_item,parent,false);
+                .inflate(R.layout.user_change_item,parent,false);
         final ItemViewHolder itemViewHolder=new ItemViewHolder(view);
-        itemViewHolder.change_singer_button.setOnClickListener(new View.OnClickListener() {
+        itemViewHolder.change_User_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int index=itemViewHolder.getAdapterPosition();
-                Singer Singer=SingerList.get(index);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("singer",Singer);//将singer存入bundle通过Intent传递
-                Intent intent=new Intent(mContext, ChangeSinger.class);
-                intent.putExtras(bundle);
+                User User=UserList.get(index);
+                Intent intent = new Intent(mContext, ChangeUserInfoActivity.class);
+                intent.putExtra("id",User.getU_id());
                 mContext.startActivity(intent);
             }
         });
@@ -71,8 +66,8 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ItemViewHo
     }
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {//绑定view
-        Singer Singer=SingerList.get(position);
-        holder.SingerName.setText(Singer.getS_name());
+        User User=UserList.get(position);
+        holder.UserName.setText(User.getU_username());
 
         if(listener != null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +82,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ItemViewHo
     }
     @Override
     public int getItemCount() {
-        return SingerList.size();
+        return UserList.size();
     }
 
 

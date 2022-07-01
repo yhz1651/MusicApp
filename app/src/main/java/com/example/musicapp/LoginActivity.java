@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     application1.setValue(flag);
                     Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
                     Intent intent;
-                    if(flag.equals("1234"))
+                    if(flag.equals("U00000000001"))
                     {intent = new Intent(LoginActivity.this, AdminActivity.class);
                     startActivity(intent);}//管理员账号进入管理页面
                     else{

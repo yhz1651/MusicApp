@@ -114,6 +114,7 @@
             android:background="@drawable/frame_no_line" >
             <ImageView
                 android:background="@drawable/listen"
+                android:id="@+id/music_manager"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:layout_gravity="center"
@@ -169,6 +170,7 @@
             <ImageView
                 android:background="@drawable/character"
                 android:layout_marginTop="30dp"
+                android:id="@+id/user_manager"
                 android:layout_marginBottom="30dp"
                 android:layout_gravity="center"
                 android:layout_width="70dp"
@@ -209,7 +211,7 @@
                 android:id="@+id/singernumber"
                 android:layout_marginBottom="15dp"
                 android:textColor="#000000"
-                android:text="用户管理"
+                android:text="歌手管理"
                 android:layout_weight="3"
                 android:textSize="14dp"
                 android:textStyle="bold" />
@@ -225,6 +227,7 @@
         android:background="@drawable/frame_no_line">
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/list_title"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"

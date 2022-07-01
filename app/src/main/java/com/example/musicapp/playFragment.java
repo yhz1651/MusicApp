@@ -142,7 +142,7 @@ public class playFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(mediaplayer==null) return;
-                if(playmode==0){// 0为列表循环
+                if(playmode==0){
                     music_id=(++music_id) % musicList.size();
                     initMediaPlayer(musicList.get(music_id));
                 }else if(playmode==1){// 1为单曲循环
@@ -219,7 +219,7 @@ public class playFragment extends Fragment {
         Music song;
 
         if (cursor.moveToFirst()) {
-            do{
+            do{//获取本地歌曲列表 存入数组
                 fileName = cursor.getString(1);
                 title = cursor.getString(2);
                 duration = cursor.getInt(3);
@@ -229,10 +229,7 @@ public class playFragment extends Fragment {
                 System.out.println(filePath);
                 song = new Music(null,title,singer,filePath,null,duration);
                 musicList.add(song);
-                //大于30秒的
-//                if (duration > 30000) {
-//                    musicList.add(song);
-//                }
+
             }while (cursor.moveToNext());
             // 释放资源
             cursor.close();
@@ -256,12 +253,12 @@ public class playFragment extends Fragment {
             mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    if(playmode==0){// 0为列表循环
+                    if(playmode==0){
                         music_id=(++music_id) % musicList.size();
                         initMediaPlayer(musicList.get(music_id));
-                    }else if(playmode==1){// 1为单曲循环
+                    }else if(playmode==1){
 
-                    }else{// 2为随机播放
+                    }else{
                         music_id = new Random().nextInt(musicList.size());
                         initMediaPlayer(musicList.get(music_id));
                     }
@@ -303,12 +300,14 @@ public class playFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while(true){
+                    boolean i = true;
+                    while(i){
                         handler.sendEmptyMessage(0);
                         try {
                             Thread.sleep(1000);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            i=false;
                         }
                     }
                 }

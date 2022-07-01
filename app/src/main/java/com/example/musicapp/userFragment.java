@@ -83,10 +83,20 @@ public class userFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        ImageView songa = view.findViewById(R.id.change_user) ;//重新登录
+        ImageView songa = view.findViewById(R.id.change_user) ;//改变用户
         songa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageView changeinfo = view.findViewById(R.id.changeinfo) ;//改变用户
+        changeinfo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();//将用户名存入Application
+                String id =application1.getValue();
+                Intent intent=new Intent(getContext(), ChangeUserInfoActivity.class);
+                intent.putExtra("id",id);
                 startActivity(intent);
             }
         });

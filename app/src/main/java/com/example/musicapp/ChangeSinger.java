@@ -58,8 +58,8 @@ public class ChangeSinger extends AppCompatActivity {
                 s_name=singername.getText().toString().trim();
                 s_intro=singerintro.getText().toString().trim();
                 s_region=singerregion.getText().toString().trim();//获取修改值
-
-                startActivity(intent);
+                change();
+                finish();
             }
         });
 
@@ -105,9 +105,8 @@ public class ChangeSinger extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Log.i("text", "success upload!");
                         String json = response.body().string();
-                        Log.i("success........", "成功" + json);//上传成功后插入到本地歌曲表
+                        Log.i("success", "成功" + json);//上传成功后插入到本地歌曲表
 
                     }
                 });

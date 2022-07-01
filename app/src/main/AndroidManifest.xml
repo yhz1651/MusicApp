@@ -27,9 +27,6 @@
             android:name=".MusicListActivity"
             android:exported="true" />
         <activity
-            android:name=".change_music"
-            android:exported="true" />
-        <activity
             android:name=".UploadActivity"
             android:exported="true" />
         <activity
