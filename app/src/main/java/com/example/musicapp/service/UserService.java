@@ -110,7 +110,6 @@ public class UserService {
                     Log.e("text", "failure upload!" + e.getMessage());
                 }
 
-
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     Log.i("text", "success upload!");
@@ -118,7 +117,6 @@ public class UserService {
                 }
             });
             while(ans==null){
-
             }
             return ans;
         }
