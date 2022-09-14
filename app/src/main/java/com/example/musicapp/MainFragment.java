@@ -58,7 +58,6 @@ import okhttp3.Response;
 public class MainFragment extends Fragment {
     private String ans;
     private PlayViewModel viewModel;
-    private int i;
     private MainViewModel mViewModel;
     private List<Music> musicList =new ArrayList<Music>();
     private RecyclerView recyclerView;
@@ -74,8 +73,6 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
-        Intent intent=getActivity().getIntent();
-        i = intent.getIntExtra("idd",0);
         recyclerView = view.findViewById(R.id.recyclerView);
         up_btn = view.findViewById(R.id.upload) ;
         search_btn = view.findViewById(R.id.search);
