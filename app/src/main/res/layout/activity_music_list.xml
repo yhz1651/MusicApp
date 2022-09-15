@@ -10,15 +10,10 @@
 
     <LinearLayout
         android:id="@+id/top"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="697dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,51 +26,19 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/s_key"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/login_radius"
-            android:hint="输入搜索信息"
-            android:paddingStart="15dp"
-            android:textSize="15sp" />
 
-        <ImageButton
-            android:id="@+id/search"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/search"
-            android:maxHeight="10dp"></ImageButton>
-
-        <ImageButton
-            android:id="@+id/upload"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/upload"
-            android:maxHeight="10dp"></ImageButton>
-
-        <ImageButton
-            android:id="@+id/userpage"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/userpage"
-            android:maxHeight="10dp"></ImageButton>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="352dp"
-        android:layout_height="450dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="335dp"
+        android:layout_height="369dp"
         android:background="@drawable/frame_no_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.728">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -89,15 +52,14 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/music_bigicon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/top" />
 
     <TextView
         android:id="@+id/creater"

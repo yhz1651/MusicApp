@@ -9,6 +9,9 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+/**
+ * 将uri转化为path
+ */
 
 public class UriTool {
     public static String UriToPath(Context context, Uri uri) {

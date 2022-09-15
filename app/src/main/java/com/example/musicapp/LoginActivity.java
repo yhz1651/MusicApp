@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("TAG",name+"_"+pass);
                 UserService uService=new UserService(LoginActivity.this);
                 String flag=uService.login(name, pass);
-
+                if(flag==null){Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();return;}
                 if(!flag.equals("false")){//如果不是返回false即登录成功
                     Log.i("TAG","登录成功");
                     UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();//将用户名存入Application
@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);}//管理员账号进入管理页面
                     else{
                     intent = new Intent(LoginActivity.this,MainActivity.class);
-//                    intent.putExtra("userid",flag); //
                     startActivity(intent);}
                 }else{
                     Log.i("TAG","登录失败");

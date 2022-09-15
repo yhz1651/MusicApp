@@ -11,6 +11,7 @@ public class PlayViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private final MutableLiveData<List<Music>> selectMusic = new MutableLiveData<List<Music>>();
 
+
     public void setSelectMusic(List<Music> music){
         selectMusic.setValue(music);
     }

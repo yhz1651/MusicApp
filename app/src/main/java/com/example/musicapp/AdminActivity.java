@@ -18,7 +18,9 @@ import com.example.musicapp.object.MusicList;
 import com.example.musicapp.object.Singer;
 import com.example.musicapp.object.User;
 import com.example.musicapp.service.DatabaseHelper;
+import com.example.musicapp.tool.CallAble;
 import com.example.musicapp.tool.DownloadTool;
+import com.example.musicapp.tool.JsonTool;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -56,11 +58,13 @@ public class AdminActivity extends AppCompatActivity {
     private List<Singer> SingerList = new ArrayList<Singer>();
     private List<User> UserList= new ArrayList<User>();
     private RecyclerView recyclerView;
+    private JsonTool jsontool;
     private String ans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_fragment);
+        jsontool = new JsonTool();
         MusicList.clear();
         ask_music();//获取歌曲列表
         recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
@@ -116,8 +120,8 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
-    public void  ask_singer(){//调用接口
-        AdminActivity.askSinger callable = new AdminActivity.askSinger();//将实现Callable接口的对象作为参数创建一个FutureTask对象
+    public void  ask_singer(){//调用接口获取歌手信息
+        CallAble.askSinger callable = new CallAble.askSinger();//将实现Callable接口的对象作为参数创建一个FutureTask对象
         FutureTask<String> task = new FutureTask<>(callable);
         //创建线程处理当前callable任务
         Thread thread = new Thread(task);
@@ -132,50 +136,14 @@ public class AdminActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        jsonToList(ans);
-    }
-    class askSinger implements Callable<String>
-    {   String ans;
-        @Override
-        public String call() throws Exception {//创建带回调方法的线程进行网络请求
-            OkHttpClient okHttpClient = new OkHttpClient();
-            RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
-                    .setType(MultipartBody.FORM)//传参
-                    .addPart(Headers.of(
-                            "Content-Disposition",
-                            "form-data; name=\"u_username\""),
-                            RequestBody.create(null, "ss"))
-                    .build();
-            String url = DownloadTool.url +"/askSinger";
-            System.out.println("----------------------------------------------------");
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
-            Call call = okHttpClient.newCall(request);
-            call.enqueue(new Callback() {//回调方法
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("text", "failure upload!" + e.getMessage());
-                }
-
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    Log.i("text", "run ask singer !");
-                    ans = response.body().string();
-                    Log.i("text", ans);
-                }
-            });
-            Thread.sleep(1000);
-            return ans;
-        }
+        SingerList=jsontool.jsonToList_singer(ans);
     }
 
 
 
-    public void  ask_music(){
-        AdminActivity.askMusic callable = new AdminActivity.askMusic();
+
+    public void  ask_music(){//调用接口获取歌曲信息
+        CallAble.askMusic callable = new CallAble.askMusic();
         //将实现Callable接口的对象作为参数创建一个FutureTask对象
         FutureTask<String> task = new FutureTask<>(callable);
         //创建线程处理当前callable任务
@@ -191,47 +159,12 @@ public class AdminActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        jsonToList_music(ans);//获取音乐播放列表
-    }
-    class askMusic implements Callable<String>
-    {   String ans;
-        @Override
-        public String call() throws Exception {//创建带回调方法的线程进行网络请求
-            OkHttpClient okHttpClient = new OkHttpClient();
-            RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
-                    .setType(MultipartBody.FORM)//传参
-                    .addPart(Headers.of(
-                            "Content-Disposition",
-                            "form-data; name=\"u_username\""),
-                            RequestBody.create(null, "ss"))
-                    .build();
-            String url = DownloadTool.url +"/askMusic";
-            System.out.println("----------------------------------------------------");
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
-            Call call = okHttpClient.newCall(request);
-            call.enqueue(new Callback() {//回调方法
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("text", "failure upload!" + e.getMessage());
-                }
-
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    Log.i("text", "success upload!");
-                    ans = response.body().string();
-                }
-            });
-            Thread.sleep(1000);
-            return ans;
-        }
+        MusicList=jsontool.jsonToList_music(ans);//获取音乐播放列表
     }
 
-    public void  ask_user(){
-        AdminActivity.askUser callable = new AdminActivity.askUser();
+
+    public void  ask_user(){//调用接口获取用户信息
+        CallAble.askUser callable = new CallAble.askUser();
         //将实现Callable接口的对象作为参数创建一个FutureTask对象
         FutureTask<String> task = new FutureTask<>(callable);
         //创建线程处理当前callable任务
@@ -247,68 +180,10 @@ public class AdminActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        jsonToList_user(ans);//获取用户列表
-    }
-    class askUser implements Callable<String>
-    {   String ans;
-        @Override
-        public String call() throws Exception {//创建带回调方法的线程进行网络请求
-            OkHttpClient okHttpClient = new OkHttpClient();
-            RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
-                    .setType(MultipartBody.FORM)//传参
-                    .addPart(Headers.of(
-                            "Content-Disposition",
-                            "form-data; name=\"u_username\""),
-                            RequestBody.create(null, "ss"))
-                    .build();
-            String url = DownloadTool.url +"/askUserList";
-            System.out.println("----------------------------------------------------");
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
-            Call call = okHttpClient.newCall(request);
-            call.enqueue(new Callback() {//回调方法
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("text", "failure upload!" + e.getMessage());
-                }
-
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    Log.i("text", "success upload!");
-                    ans = response.body().string();
-                }
-            });
-            Thread.sleep(1000);
-            return ans;
-        }
+        UserList=jsontool.jsonToList_user(ans);//获取用户列表
     }
 
 
-
-    public  void jsonToList(String json) {//将JSON转化为对象数组
-        Gson gson = new Gson();
-        SingerList = gson.fromJson(json, new TypeToken<List<Singer>>() {}.getType());//对于不是类的情况，用这个参数给出
-        for (Singer singer1 : SingerList) {
-            System.out.println(singer1.getS_name());
-        }
-    }
-    public  void jsonToList_music(String json) {//将JSON转化为对象数组
-        Gson gson = new Gson();
-        MusicList = gson.fromJson(json, new TypeToken<List<Music>>() {}.getType());//对于不是类的情况，用这个参数给出
-        for (Music Music1 : MusicList) {
-            System.out.println(Music1.getM_name());
-        }
-    }
-    public  void jsonToList_user(String json) {//将JSON转化为对象数组
-        Gson gson = new Gson();
-        UserList = gson.fromJson(json, new TypeToken<List<User>>() {}.getType());//对于不是类的情况，用这个参数给出
-        for (User User1 : UserList) {
-            System.out.println(User1.getU_username());
-        }
-    }
 }
 
 

@@ -135,7 +135,7 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                     ans = response.body().string();
                 }
             });
-            while(ans==null){}
+            Thread.sleep(1000);
             return ans;
         }
     }
@@ -221,9 +221,7 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                     ans = response.body().string();
                 }
             });
-            while(ans==null){
-
-            }
+            Thread.sleep(1000);
             return ans;
         }
     }

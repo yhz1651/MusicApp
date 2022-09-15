@@ -11,6 +11,7 @@ public class Music implements Serializable {
     private String m_url;//路径
     private String m_userid;//上传用户ID
     private int m_duration;
+    private boolean local;//是否在本地
 
     public Music(String id, String name, String singer, String url, String user,int duration) {//对上传信息初始化
         this.m_id = id;
@@ -19,8 +20,14 @@ public class Music implements Serializable {
         this.m_url = url;
         this.m_userid = user;
         this.m_duration =duration;
+        this.local=true;
     }
-
+    public boolean getLocal() {
+        return local;
+    }
+    public void setLocal(boolean local) {
+        this.local = local;
+    }
     public int getM_duration() {
         return m_duration;
     }

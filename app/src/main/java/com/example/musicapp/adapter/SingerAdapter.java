@@ -59,10 +59,10 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ItemViewHo
             @Override
             public void onClick(View v) {
                 int index=itemViewHolder.getAdapterPosition();
-                Singer Singer=SingerList.get(index);
+                Singer Singer=SingerList.get(index);//获得点击位置
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("singer",Singer);//将singer存入bundle通过Intent传递
-                Intent intent=new Intent(mContext, ChangeSinger.class);
+                Intent intent=new Intent(mContext, ChangeSinger.class);//进入改变歌手信息界面
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

@@ -5,40 +5,34 @@ package com.example.musicapp.object;
 import java.io.Serializable;
 
 public class MusicList implements Serializable {
-    private String id;//歌单ID
-    private String url;//歌曲本地地址
-    private String user;//创建者ID
-    private String imageurl;//图片url
-
-    public String getId() {
-        return id;
+    private String ml_id;//歌单ID
+    private String ml_name;//歌曲名
+    private String ml_userid;//创建者ID
+    public String getMl_id() {
+        return ml_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMl_id(String ml_id) {
+        this.ml_id = ml_id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getMl_name() {
+        return ml_name;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setMl_name(String ml_name) {
+        this.ml_name = ml_name;
     }
 
-    public String getUser() {
-        return user;
+    public String getMl_userid() {
+        return ml_userid;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setMl_userid(String ml_userid) {
+        this.ml_userid = ml_userid;
     }
 
-    public String getImageurl() {
-        return imageurl;
-    }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
-    }
+
+
 }

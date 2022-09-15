@@ -47,7 +47,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 用户个人界面
+ * 用户主页面
  包含上传、本地歌曲列表、歌单、修改用户信息等功能
  @author lc
  */
@@ -90,7 +90,14 @@ public class userFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        ImageView changeinfo = view.findViewById(R.id.changeinfo) ;//改变用户
+        ImageView store = view.findViewById(R.id.store) ;//歌单
+        store.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ShowMyList.class);
+                getActivity().startActivityForResult(intent,1);
+            }
+        });
+        ImageView changeinfo = view.findViewById(R.id.changeinfo) ;//修改个人信息
         changeinfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 UserApplication application1 = (UserApplication) LoginActivity.getInstance().getApplication();//将用户名存入Application
@@ -100,7 +107,7 @@ public class userFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        Button play_button = view.findViewById(R.id.paly_all);
+        Button play_button = view.findViewById(R.id.paly_all);//播放全部
         play_button.setOnClickListener(new View.OnClickListener() {//点击播放按钮，将歌单存入ViewModel，跳转到播放页面
             public void onClick(View v) {
                 viewModel = new ViewModelProvider(

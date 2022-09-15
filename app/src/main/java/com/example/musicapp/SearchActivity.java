@@ -84,6 +84,7 @@ public class SearchActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         jsonToList(ans);
     }
     class askMusic implements Callable<String>
@@ -92,10 +93,11 @@ public class SearchActivity extends AppCompatActivity {
         public String call() throws Exception {//创建带回调方法的线程进行网络请求
             OkHttpClient okHttpClient = new OkHttpClient();
             RequestBody requestBody = new MultipartBody.Builder()//创建requestbody
-                    .setType(MultipartBody.FORM)//传参
+                    .setType(MultipartBody.FORM)
                     .addPart(Headers.of(
                             "Content-Disposition",
                             "form-data; name=\"m_name\""),
+
                             RequestBody.create(null, key))
                     .build();
             String url = DownloadTool.url +"/searchMusic";
@@ -118,7 +120,7 @@ public class SearchActivity extends AppCompatActivity {
                     ans = response.body().string();
                 }
             });
-            while(ans==null){}//等待赋值
+            Thread.sleep(1000);
             return ans;
         }
     }

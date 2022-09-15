@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginback"
+    tools:context=".ListMakeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/frame_radius_alpha"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="创建歌单"
+            android:textColor="#4684ff"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="136dp"
+            android:background="#DBDEE3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <EditText
+            android:id="@+id/listname"
+            android:layout_width="206dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="83dp"
+            android:layout_span="3"
+            android:background="@drawable/login_radius"
+            android:hint="请输入歌单名称"
+            android:paddingStart="15dp"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cover" />
+
+        <Button
+            android:id="@+id/Create"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="62dp"
+            android:layout_span="3"
+            android:background="@drawable/login_button"
+            android:text="创建"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listname" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
