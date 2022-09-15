@@ -62,7 +62,7 @@ public class MainFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
-        up_btn = view.findViewById(R.id.upload) ;
+        up_btn = view.findViewById(R.id.upload);
         search_btn = view.findViewById(R.id.search);
         tex = view.findViewById(R.id.s_key);
 //        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -86,7 +86,7 @@ public class MainFragment extends Fragment {
         });
         return view;
     }
-    public void  ask(){
+    public void ask(){
         askMusic callable = new askMusic();
         //将实现Callable接口的对象作为参数创建一个FutureTask对象
         FutureTask<String> task = new FutureTask<>(callable);

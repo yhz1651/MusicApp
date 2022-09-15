@@ -1,5 +1,6 @@
 package com.example.musicapp;
 
+import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 
@@ -46,7 +47,7 @@ public class playFragment extends Fragment {
     private Button btn_music_pre;
     private Button btn_music_play;
     private Button btn_music_next;
-    private Button btn_music_list;
+    private Button btn_music_comment;
     private RecyclerView recyclerView;
     private int playmode=0; // 0为列表循环，1为单曲循环，2为随机播放
     private int music_id=1;
@@ -65,6 +66,7 @@ public class playFragment extends Fragment {
                 requireActivity(),
                 new ViewModelProvider.NewInstanceFactory()).get(PlayViewModel.class);
         musicList = PlayViewModel.getSelectMusic().getValue();
+
         if(musicList==null){
             musicList=new ArrayList<Music>();
             initMusicList();
@@ -85,11 +87,11 @@ public class playFragment extends Fragment {
         btn_music_pre=view.findViewById(R.id.btn_music_pre);
         btn_music_play=view.findViewById(R.id.btn_music_play);
         btn_music_next=view.findViewById(R.id.btn_music_next);
-        btn_music_list=view.findViewById(R.id.btn_music_list);
+        btn_music_comment=view.findViewById(R.id.btn_music_comment);
         recyclerView =view.findViewById(R.id.recyclerView);
 
 
-        //切换歌曲播放模式
+        // 切换歌曲播放模式
         btn_music_mode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +106,7 @@ public class playFragment extends Fragment {
             }
         });
 
-        //暂停，播放
+        // 暂停和播放
         btn_music_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +123,7 @@ public class playFragment extends Fragment {
             }
         });
 
-        //上一首下一首
+        // 上一首下一首
         btn_music_pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +139,8 @@ public class playFragment extends Fragment {
                 }
             }
         });
-        //播放方式
+
+        // 播放方式
         btn_music_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,8 +157,7 @@ public class playFragment extends Fragment {
             }
         });
 
-
-        //进度条 开始时间 结束时间
+        // 进度条 开始时间 结束时间
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -176,9 +178,9 @@ public class playFragment extends Fragment {
             }
         });
 
-        //绑定adapter
+        // 绑定adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        PlayListAdapter adapter=new PlayListAdapter( musicList,getContext());
+        PlayListAdapter adapter=new PlayListAdapter(musicList,getContext());
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new PlayListAdapter.OnItemClickListener() {
             @Override
@@ -193,8 +195,27 @@ public class playFragment extends Fragment {
             }
         });
 
+        // 评论
+        btn_music_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                String musicname = music_name.getText().toString();
+//                String singer = music_singer.getText().toString();
+                if(music_name.getText().toString().equals("歌曲名") || music_name.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getContext(),"请先选择歌曲！",Toast.LENGTH_SHORT).show(); // 提示
+                }
+                else // 已选择歌曲
+                {
+                    Toast.makeText(getContext(),music_name.getText().toString(),Toast.LENGTH_SHORT).show(); // 提示
+                    Intent intent=new Intent(getContext(), CommentActivity.class);
+                    intent.putExtra("music_name",music_name.getText().toString());
+                    intent.putExtra("music_singer",music_singer.getText().toString());
+                    startActivity(intent);
+                }
 
-
+            }
+        });
     }
 
 

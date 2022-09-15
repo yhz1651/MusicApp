@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);}//管理员账号进入管理页面
                     else{
                     intent = new Intent(LoginActivity.this,MainActivity.class);
+//                    intent.putExtra("userid",flag); //
                     startActivity(intent);}
                 }else{
                     Log.i("TAG","登录失败");

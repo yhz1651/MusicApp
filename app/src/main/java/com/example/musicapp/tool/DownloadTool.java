@@ -14,7 +14,7 @@ public class DownloadTool {
     int count = 0;
     long total = 0;
     int progress = 0;
-    public static String url="http://192.168.1.110:7506";
+    public static String url="http://192.168.137.1:7506";
     public void download(String site,String filename) throws IOException {
        URL url = new URL(site);
        URLConnection con = url.openConnection();
