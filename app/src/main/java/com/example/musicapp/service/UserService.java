@@ -110,14 +110,14 @@ public class UserService {
                     Log.e("text", "failure upload!" + e.getMessage());
                 }
 
+
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     Log.i("text", "success upload!");
                     ans = response.body().string();
                 }
             });
-            while(ans==null){
-            }
+            Thread.sleep(1000);
             return ans;
         }
     }
@@ -167,16 +167,13 @@ public class UserService {
                 }
 
 
-
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     Log.i("text", "success upload!");
                     ans = response.body().string();
                 }
             });
-            while(ans==null){
-
-            }
+            Thread.sleep(1000);
             return ans;
         }
     }
