@@ -163,7 +163,7 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/music_next" />
         <Button
-            android:id="@+id/btn_music_list"
+            android:id="@+id/btn_music_comment"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
