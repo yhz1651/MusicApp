@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.musicapp" >
+    package="com.example.order" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".UserApplication"
+        android:name="com.example.order.UserApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,44 +16,43 @@
         android:theme="@style/Theme.MusicApp"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".CommentActivity"
+            android:name="com.example.order.activity.CommentActivity"
             android:exported="true" />
         <activity
-            android:name=".ShowMyList"
+            android:name="com.example.order.activity.ShowMyList"
             android:exported="true" />
         <activity
-            android:name=".ShowListActivity"
+            android:name="com.example.order.activity.ShowListActivity"
             android:exported="true" />
         <activity
-            android:name=".ListMakeActivity"
+            android:name="com.example.order.activity.ListMakeActivity"
             android:exported="true" />
         <activity
-            android:name=".ChangeSinger"
+            android:name="com.example.order.activity.ChangeSinger"
             android:exported="true" />
         <activity
-            android:name=".AdminActivity"
+            android:name="com.example.order.activity.AdminActivity"
             android:exported="true" />
         <activity
-            android:name=".ChangeUserInfoActivity"
+            android:name="com.example.order.activity.ChangeUserInfoActivity"
             android:exported="true" />
         <activity
-            android:name=".MusicListActivity"
+            android:name="com.example.order.activity.MusicListActivity"
             android:exported="true" />
         <activity
-            android:name=".UploadActivity"
+            android:name="com.example.order.activity.UploadActivity"
             android:exported="true" />
         <activity
-            android:name=".SearchActivity"
+            android:name="com.example.order.activity.SearchActivity"
             android:exported="true" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.example.order.activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
+            android:name="com.example.order.activity.MainActivity"
+            android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.order.activity.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

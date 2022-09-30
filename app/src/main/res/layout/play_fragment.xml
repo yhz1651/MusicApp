@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f6f7fb"
-    tools:context=".playFragment"
+    tools:context=".fragment.playFragment"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/top"
@@ -60,8 +60,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_margin="20dp"
-
+        android:layout_margin="10dp"
         android:background="@drawable/frame_no_line"
         android:layout_height="wrap_content">
         <ImageView
