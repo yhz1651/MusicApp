@@ -1,4 +1,4 @@
-# MusicApp
+# MusicApp 安卓前端
 ### 开发人员：yhz、jzq、lc、xd
 
 # 环境
