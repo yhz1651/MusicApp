@@ -1,7 +1,7 @@
 # MusicApp
-### anthorized by yhz、jzq、lc、xd
+### 开发人员：yhz、jzq、lc、xd
 
-# environment
-### android studio 2020.3
-### jdk 1.8
-### android api 32
+# 环境
+### Android Studio 2020.3
+### JDK 1.8
+### Android API 32
